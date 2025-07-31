@@ -18,63 +18,93 @@ app.use(express.urlencoded({ extended: true }));
 const products = [
   {
     id: 1,
-    name: "Smart Pet Feeder with Camera & App Control",
+    name: "Smart Pet Feeder Pro",
     price: 149.99,
     category: "smart-tech",
-    description: "Automatically dispenses food, monitors eating habits, and allows remote interaction through our mobile app.",
-    image: "https://placehold.co/400x300/ADD8E6/000000?text=Smart+Feeder",
+    description: "AI-powered feeding schedule with camera monitoring, portion control, and health tracking. App-controlled with voice commands and treat dispensing.",
+    image: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=400&h=300&fit=crop",
     inStock: true,
-    features: ["App Control", "HD Camera", "Portion Control", "Scheduling"]
+    features: ["AI Scheduling", "HD Camera", "Voice Control", "Health Tracking", "Treat Dispenser"]
   },
   {
     id: 2,
-    name: "GPS Pet Tracker with Geofencing",
+    name: "GPS Pet Tracker",
     price: 89.99,
     category: "smart-tech",
-    description: "Real-time location tracking, escape alerts, and activity monitoring to keep your pet safe.",
-    image: "https://placehold.co/400x300/90EE90/000000?text=GPS+Tracker",
+    description: "Real-time location tracking with geofencing alerts, escape notifications, and activity monitoring. Waterproof with 7-day battery life.",
+    image: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=400&h=300&fit=crop",
     inStock: true,
-    features: ["Real-time GPS", "Geofencing", "Activity Monitor", "Long Battery"]
+    features: ["Real-time GPS", "Geofencing", "Activity Monitor", "7-Day Battery", "Waterproof"]
   },
   {
     id: 3,
-    name: "Eco-Friendly Biodegradable Poop Bags",
+    name: "Eco-Friendly Chew Toys",
     price: 24.99,
     category: "eco-friendly",
-    description: "Sustainable and convenient solution for pet waste. Made from plant-based materials.",
-    image: "https://placehold.co/400x300/B0E0E6/000000?text=Eco+Poop+Bags",
+    description: "100% biodegradable chew toys made from natural hemp and organic cotton. Non-toxic, sustainable, and designed for aggressive chewers.",
+    image: "https://images.unsplash.com/photo-1605568427561-40dd23c2acea?w=400&h=300&fit=crop",
     inStock: true,
-    features: ["Biodegradable", "Leak-proof", "Easy Tear", "Dispenser Included"]
+    features: ["100% Biodegradable", "Natural Hemp", "Organic Cotton", "Non-toxic", "Durable"]
   },
   {
     id: 4,
-    name: "Interactive Laser/Treat Dispensing Toy",
-    price: 79.99,
-    category: "smart-tech",
-    description: "Keep pets entertained and mentally stimulated with unpredictable movements and treat rewards.",
-    image: "https://placehold.co/400x300/FFD700/000000?text=Interactive+Toy",
+    name: "Glow-in-Dark Safety Leash",
+    price: 39.99,
+    category: "safety",
+    description: "High-visibility LED leash with reflective strips and rechargeable battery. Perfect for evening walks with multiple light modes and weather resistance.",
+    image: "https://images.unsplash.com/photo-1587300003388-59208cc962cb?w=400&h=300&fit=crop",
     inStock: true,
-    features: ["Auto Play Mode", "Treat Dispenser", "Safe Laser", "Timer Function"]
+    features: ["LED Lights", "Reflective Strips", "Rechargeable", "Multiple Modes", "Weather Resistant"]
   },
   {
     id: 5,
-    name: "Personalized Glow-in-the-Dark LED Leash",
-    price: 39.99,
-    category: "safety",
-    description: "Custom LED leash with your pet's name. Perfect for evening walks and safety.",
-    image: "https://placehold.co/400x300/ADD8E6/000000?text=Glow+Leash",
+    name: "Smart Pet House",
+    price: 299.99,
+    category: "smart-tech",
+    description: "Climate-controlled pet house with automated temperature regulation, weather monitoring, and app connectivity. Eco-friendly materials with solar panel option.",
+    image: "https://images.unsplash.com/photo-1583511655857-d19b40a7a54e?w=400&h=300&fit=crop",
     inStock: true,
-    features: ["LED Lights", "Custom Name", "Rechargeable", "Weather Resistant"]
+    features: ["Climate Control", "Weather Monitor", "App Connected", "Solar Panel", "Eco Materials"]
   },
   {
     id: 6,
-    name: "Bamboo Eco-Friendly Dog Bowl Set",
-    price: 34.99,
-    category: "eco-friendly",
-    description: "Sustainable bamboo bowls that are safe for pets and the environment.",
-    image: "https://placehold.co/400x300/DEB887/000000?text=Bamboo+Bowls",
+    name: "Health Monitor Collar",
+    price: 129.99,
+    category: "health",
+    description: "Advanced health tracking with heart rate monitoring, activity levels, sleep pattern analysis, and vet alert system. Waterproof with 14-day battery life.",
+    image: "https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=400&h=300&fit=crop",
     inStock: true,
-    features: ["Bamboo Material", "Non-slip Base", "Easy Clean", "Set of 2"]
+    features: ["Heart Rate Monitor", "Activity Tracking", "Sleep Analysis", "Vet Alerts", "14-Day Battery"]
+  },
+  {
+    id: 7,
+    name: "Smart Water Fountain",
+    price: 79.99,
+    category: "smart-tech",
+    description: "Self-cleaning water fountain with filtration system and hydration tracking. Encourages healthy drinking habits with fresh, flowing water.",
+    image: "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop",
+    inStock: true,
+    features: ["Self-Cleaning", "Filtration System", "Hydration Tracking", "Fresh Water", "Quiet Operation"]
+  },
+  {
+    id: 8,
+    name: "Interactive Treat Dispenser",
+    price: 59.99,
+    category: "smart-tech",
+    description: "App-controlled puzzle feeder that dispenses treats based on activity levels. Keeps pets mentally stimulated and prevents overeating.",
+    image: "https://images.unsplash.com/photo-1605568427561-40dd23c2acea?w=400&h=300&fit=crop",
+    inStock: true,
+    features: ["App Controlled", "Puzzle Feeder", "Activity Based", "Mental Stimulation", "Portion Control"]
+  },
+  {
+    id: 9,
+    name: "Personalized Pet Tags",
+    price: 19.99,
+    category: "safety",
+    description: "Custom engraved tags with QR codes linking to digital pet profiles. Eco-friendly materials with emergency contact integration.",
+    image: "https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=400&h=300&fit=crop",
+    inStock: true,
+    features: ["Custom Engraving", "QR Code", "Digital Profile", "Emergency Contacts", "Eco-Friendly"]
   }
 ];
 
