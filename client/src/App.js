@@ -7,6 +7,7 @@ import ProductDetail from './pages/ProductDetail';
 import Cart from './pages/Cart';
 import About from './pages/About';
 import Footer from './components/Footer';
+import ChatBot from './components/ChatBot';
 import { CartProvider } from './context/CartContext';
 import './App.css';
 
@@ -45,6 +46,7 @@ function App() {
             </Routes>
           </main>
           <Footer />
+          <ChatBot />
         </div>
       </Router>
     </CartProvider>

@@ -87,6 +87,102 @@ const Products = () => {
           </p>
         </div>
 
+        {/* Mission Statement */}
+        <div style={{ 
+          background: 'linear-gradient(135deg, #f8fafc 0%, #e0f2fe 100%)', 
+          padding: '2rem', 
+          borderRadius: '1rem',
+          marginBottom: '2rem',
+          textAlign: 'center'
+        }}>
+          <h2 style={{ fontSize: '1.75rem', color: '#1f2937', marginBottom: '1rem' }}>
+            Our Mission
+          </h2>
+          <p style={{ fontSize: '1.1rem', color: '#4b5563', lineHeight: '1.6', maxWidth: '900px', margin: '0 auto' }}>
+            What started as a simple idea has grown into a mission to revolutionize the pet industry. We believe that our furry 
+            friends deserve the best, and that technology can help us provide it while being mindful of our environmental impact.
+          </p>
+          <p style={{ fontSize: '1.1rem', color: '#4b5563', lineHeight: '1.6', maxWidth: '900px', margin: '1rem auto 0' }}>
+            Today, we're proud to offer a curated selection of smart, safe, and sustainable products that enhance the bond 
+            between pets and their families. Every product we sell reflects our commitment to quality, innovation, and responsibility.
+          </p>
+          
+          {/* Product Philosophy Icons */}
+          <div style={{ 
+            display: 'flex', 
+            justifyContent: 'center', 
+            gap: '2rem', 
+            marginTop: '1.5rem',
+            flexWrap: 'wrap'
+          }}>
+            <div style={{ 
+              display: 'flex', 
+              flexDirection: 'column', 
+              alignItems: 'center',
+              maxWidth: '180px'
+            }}>
+              <div style={{ 
+                background: '#e0f2fe', 
+                borderRadius: '50%', 
+                width: '60px', 
+                height: '60px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginBottom: '0.75rem'
+              }}>
+                <span role="img" aria-label="Smart" style={{ fontSize: '1.75rem' }}>🤖</span>
+              </div>
+              <h3 style={{ color: '#1e40af', fontSize: '1rem', marginBottom: '0.5rem' }}>Smart</h3>
+              <p style={{ fontSize: '0.875rem', color: '#6b7280' }}>Innovative technology that makes pet care easier and more enjoyable</p>
+            </div>
+            
+            <div style={{ 
+              display: 'flex', 
+              flexDirection: 'column', 
+              alignItems: 'center',
+              maxWidth: '180px'
+            }}>
+              <div style={{ 
+                background: '#fee2e2', 
+                borderRadius: '50%', 
+                width: '60px', 
+                height: '60px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginBottom: '0.75rem'
+              }}>
+                <span role="img" aria-label="Safe" style={{ fontSize: '1.75rem' }}>🛡️</span>
+              </div>
+              <h3 style={{ color: '#b91c1c', fontSize: '1rem', marginBottom: '0.5rem' }}>Safe</h3>
+              <p style={{ fontSize: '0.875rem', color: '#6b7280' }}>Rigorously tested products that prioritize your pet's safety</p>
+            </div>
+            
+            <div style={{ 
+              display: 'flex', 
+              flexDirection: 'column', 
+              alignItems: 'center',
+              maxWidth: '180px'
+            }}>
+              <div style={{ 
+                background: '#dcfce7', 
+                borderRadius: '50%', 
+                width: '60px', 
+                height: '60px',
+                display: 'flex',
+                alignItems: 'center',
+                justifyContent: 'center',
+                marginBottom: '0.75rem'
+              }}>
+                <span role="img" aria-label="Sustainable" style={{ fontSize: '1.75rem' }}>🌿</span>
+              </div>
+              <h3 style={{ color: '#166534', fontSize: '1rem', marginBottom: '0.5rem' }}>Sustainable</h3>
+              <p style={{ fontSize: '0.875rem', color: '#6b7280' }}>Eco-friendly materials and processes that respect our planet</p>
+            </div>
+          </div>
+        </div>
+
         {/* Search and Filter Bar */}
         <div style={{ 
           background: 'white', 
@@ -269,11 +365,24 @@ const Products = () => {
                     <p className="product-description">{product.description}</p>
                     
                     <div className="product-features">
-                      {product.features.map((feature, index) => (
-                        <span key={index} className="feature-tag">
-                          {feature}
-                        </span>
-                      ))}
+                      {product.features.map((feature, index) => {
+                        let tagStyle = {};
+                        
+                        // Customize tag style based on feature type
+                        if (feature.toLowerCase().includes('smart') || feature.toLowerCase().includes('tech') || feature.toLowerCase().includes('digital')) {
+                          tagStyle = { background: '#e0f2fe', color: '#1e40af' }; // Blue for smart tech
+                        } else if (feature.toLowerCase().includes('eco') || feature.toLowerCase().includes('sustainable') || feature.toLowerCase().includes('green')) {
+                          tagStyle = { background: '#dcfce7', color: '#166534' }; // Green for eco-friendly
+                        } else if (feature.toLowerCase().includes('safe') || feature.toLowerCase().includes('security') || feature.toLowerCase().includes('protection')) {
+                          tagStyle = { background: '#fee2e2', color: '#b91c1c' }; // Red for safety
+                        }
+                        
+                        return (
+                          <span key={index} className="feature-tag" style={tagStyle}>
+                            {feature}
+                          </span>
+                        );
+                      })}
                     </div>
                     
                     <div style={{ display: 'flex', gap: '0.5rem' }}>
