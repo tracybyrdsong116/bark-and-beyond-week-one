@@ -121,6 +121,8 @@ export const CartProvider = ({ children }) => {
         // Refresh cart data
         await fetchCart();
         return { success: true, message: 'Product added to cart!' };
+      } else {
+        return { success: false, message: response.data.message || 'Failed to add product to cart' };
       }
     } catch (error) {
       console.error('Error adding to cart:', error);

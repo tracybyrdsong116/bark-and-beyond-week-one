@@ -3,114 +3,449 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Online Product Ideas</title>
-    <!-- Tailwind CSS CDN -->
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Bark & Beyond - Premium Pet Products</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        body {
-            font-family: "Inter", sans-serif;
-            background-color: #f0f4f8; /* Light blue-gray background */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
-        .product-card img {
-            border-radius: 0.5rem; /* rounded corners for images */
+
+        body {
+            font-family: 'Inter', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            width: 100%;
+        }
+
+        .header {
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(10px);
+            padding: 1rem 0;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #4f46e5;
+            text-decoration: none;
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            margin-right: 0.5rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
+        }
+
+        .cart-button {
+            background: linear-gradient(135deg, #4f46e5 0%, #059669 100%);
+            border: none;
+            color: white;
+            padding: 0.75rem 1.5rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+        }
+
+        .cart-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4);
+        }
+
+        .hero {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            padding: 4rem 0;
+            text-align: center;
+            color: white;
+        }
+
+        .hero h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
             margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero p {
+            font-size: 1.25rem;
+            margin-bottom: 2rem;
+            opacity: 0.9;
+        }
+
+        .product-grid {
+            display: grid !important;
+            grid-template-columns: repeat(3, 1fr) !important;
+            gap: 20px !important;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px !important;
+            background: white !important;
+            border: 2px solid #ddd !important;
+        }
+
+        .product-card {
+            background: white !important;
+            border-radius: 10px;
+            padding: 20px !important;
+            border: 2px solid #333 !important;
+            text-align: center !important;
+            min-height: 400px;
+            display: block !important;
+            visibility: visible !important;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+        }
+
+        .product-image {
+            position: relative;
+            overflow: hidden;
+            border-radius: 0.75rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            transition: transform 0.3s;
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+
+        .product-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: #1f2937;
+            cursor: pointer;
+            transition: color 0.3s ease;
+        }
+        
+        .product-title:hover {
+            color: #059669;
+        }
+        
+        .product-image {
+            cursor: pointer;
+            transition: transform 0.3s ease;
+        }
+        
+        .product-image:hover {
+            transform: scale(1.05);
+        }
+
+        .product-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #059669;
+            margin-bottom: 1rem;
+        }
+
+        .product-description {
+            color: #6b7280;
+            margin-bottom: 1.5rem;
+            line-height: 1.5;
+        }
+
+        .add-to-cart {
+            width: 100%;
+            background: linear-gradient(135deg, #4f46e5 0%, #059669 100%);
+            color: white;
+            border: none;
+            padding: 0.75rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(79, 70, 229, 0.3);
+        }
+
+        .add-to-cart:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4);
+        }
+
+        .cart-modal {
+            display: none;
+            position: fixed;
+            z-index: 1000;
+            left: 0;
+            top: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(5px);
+        }
+
+        .cart-content {
+            background: white;
+            margin: 5% auto;
+            padding: 2rem;
+            border-radius: 1rem;
+            width: 90%;
+            max-width: 600px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 2px solid #f3f4f6;
+        }
+
+        .close-cart {
+            font-size: 2rem;
+            cursor: pointer;
+            color: #6b7280;
+            transition: color 0.3s;
+        }
+
+        .close-cart:hover {
+            color: #dc2626;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 0;
+            border-bottom: 1px solid #f3f4f6;
+        }
+
+        .cart-total {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 2px solid #f3f4f6;
+            text-align: center;
+        }
+
+        .checkout-btn {
+            background: linear-gradient(135deg, #059669 0%, #4f46e5 100%);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            cursor: pointer;
+            margin-top: 1rem;
+            transition: all 0.3s;
+            box-shadow: 0 4px 15px rgba(5, 150, 105, 0.3);
+        }
+
+        .checkout-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(5, 150, 105, 0.4);
+        }
+
+        .success-message {
+            background: linear-gradient(135deg, #d1fae5 0%, #a7f3d0 100%);
+            border: 1px solid #10b981;
+            color: #065f46;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin: 1rem 0;
+            text-align: center;
+            font-weight: 600;
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .product-grid {
+                grid-template-columns: 1fr;
+            }
         }
     </style>
 </head>
-<body class="p-4 sm:p-8 md:p-12 min-h-screen flex items-center justify-center">
-    <div class="container mx-auto max-w-4xl bg-white p-6 sm:p-8 rounded-xl shadow-lg border border-gray-200">
-        <h1 class="text-3xl sm:text-4xl font-bold text-center text-gray-800 mb-8">Top Online Product Ideas</h1>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav">
+                <a href="#" class="logo">
+                    <span class="logo-icon">🐾</span>
+                    Bark & Beyond
+                </a>
+                <button class="cart-button" onclick="openCart()">
+                    🛒 Cart (<span id="cart-count">0</span>)
+                </button>
+            </nav>
+        </div>
+    </header>
 
-        <div id="product-list" class="space-y-8">
-            <!-- Product Category 1: Pet Products and Accessories -->
-            <div class="bg-blue-50 p-6 rounded-lg shadow-md border border-blue-200">
-                <h2 class="text-2xl font-semibold text-blue-800 mb-3">1. Pet Products and Accessories</h2>
-                <p class="text-gray-700 leading-relaxed mb-4">
-                    The pet care market is booming, with pet owners increasingly treating their animals like family members. This leads to high spending on a wide range of products.
-                </p>
-                <h3 class="text-xl font-medium text-blue-700 mb-2">Why it's a good choice:</h3>
-                <ul class="list-disc list-inside text-gray-600 mb-4 space-y-1">
-                    <li><strong class="text-gray-800">Consistent demand:</strong> People are always buying things for their pets.</li>
-                    <li><strong class="text-gray-800">Variety:</strong> You can sell everything from food and treats to toys, beds, clothing, and even specialized items like pet seat covers or grooming supplies.</li>
-                    <li><strong class="text-gray-800">High profit margins:</strong> Many pet products have good markup potential.</li>
-                    <li><strong class="text-gray-800">Recurring purchases:</strong> Consumables like treats, food, and shampoos can lead to repeat business.</li>
-                </ul>
-                <h3 class="text-xl font-medium text-blue-700 mb-2">Examples:</h3>
-                <ul class="list-disc list-inside text-gray-600 space-y-1">
-                    <li>Orthopedic pet beds</li>
-                    <li>Eco-friendly pet toys</li>
-                    <li>Personalized pet collars</li>
-                    <li>Pet grooming kits</li>
-                    <li>Homemade dog treats</li>
-                </ul>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Premium Pet Products for ALL Pets</h1>
+            <p>From barks to meows, chirps to bubbles - quality products for every beloved companion</p>
+        </div>
+    </section>
 
-                <h3 class="text-xl font-semibold text-blue-800 mt-6 mb-4">New & Exclusive Dog/Pet Products:</h3>
-                <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
-                    <div class="product-card bg-white p-4 rounded-lg shadow border border-gray-100 flex flex-col items-center text-center">
-                        <img src="https://placehold.co/200x150/ADD8E6/000000?text=Smart+Feeder" alt="Smart Pet Feeder" class="w-full h-auto object-cover rounded-md mb-2">
-                        <p class="font-bold text-gray-900">Smart Pet Feeders with Camera & App Control</p>
-                        <p class="text-sm text-gray-600">Automatically dispenses food, monitors eating habits, and allows remote interaction.</p>
-                    </div>
-                    <div class="product-card bg-white p-4 rounded-lg shadow border border-gray-100 flex flex-col items-center text-center">
-                        <img src="https://placehold.co/200x150/90EE90/000000?text=GPS+Tracker" alt="GPS Pet Tracker" class="w-full h-auto object-cover rounded-md mb-2">
-                        <p class="font-bold text-gray-900">GPS Pet Trackers with Geofencing</p>
-                        <p class="text-sm text-gray-600">Real-time location tracking, escape alerts, and activity monitoring.</p>
-                    </div>
-                    <div class="product-card bg-white p-4 rounded-lg shadow border border-gray-100 flex flex-col items-center text-center">
-                        <img src="https://placehold.co/200x150/FFB6C1/000000?text=Auto+Litter+Box" alt="Self-Cleaning Litter Box" class="w-full h-auto object-cover rounded-md mb-2">
-                        <p class="font-bold text-gray-900">Self-Cleaning Litter Boxes with Odor Control</p>
-                        <p class="text-sm text-gray-600">Automated waste removal and advanced filtration systems.</p>
-                    </div>
-                    <div class="product-card bg-white p-4 rounded-lg shadow border border-gray-100 flex flex-col items-center text-center">
-                        <img src="https://placehold.co/200x150/FFD700/000000?text=Interactive+Toy" alt="Interactive Pet Toy" class="w-full h-auto object-cover rounded-md mb-2">
-                        <p class="font-bold text-gray-900">Interactive Laser/Treat Dispensing Toys</p>
-                        <p class="text-sm text-gray-600">Keep pets entertained and mentally stimulated with unpredictable movements.</p>
-                    </div>
-                    <div class="product-card bg-white p-4 rounded-lg shadow border border-gray-100 flex flex-col items-center text-center">
-                        <img src="https://placehold.co/200x150/87CEFA/000000?text=Pet+Water+Bottle" alt="Portable Pet Water Bottle" class="w-full h-auto object-cover rounded-md mb-2">
-                        <p class="font-bold text-gray-900">Portable Pet Water Bottles with Built-in Bowl</p>
-                        <p class="text-sm text-gray-600">Convenient hydration on the go, perfect for walks and travel.</p>
-                    </div>
-                    <div class="product-card bg-white p-4 rounded-lg shadow border border-gray-100 flex flex-col items-center text-center">
-                        <img src="https://placehold.co/200x150/DDA0DD/000000?text=Grooming+Gloves" alt="Pet Grooming Gloves" class="w-full h-auto object-cover rounded-md mb-2">
-                        <p class="font-bold text-gray-900">Pet Grooming Gloves with Deshedding Capabilities</p>
-                        <p class="text-sm text-gray-600">Gently removes loose fur while petting, making grooming easier.</p>
-                    </div>
-                    <div class="product-card bg-white p-4 rounded-lg shadow border border-gray-100 flex flex-col items-center text-center">
-                        <img src="https://placehold.co/200x150/F08080/000000?text=Calming+Bed" alt="Calming Pet Bed" class="w-full h-auto object-cover rounded-md mb-2">
-                        <p class="font-bold text-gray-900">Calming Pet Beds with Orthopedic Memory Foam</p>
-                        <p class="text-sm text-gray-600">Designed to reduce anxiety and provide superior joint support.</p>
-                    </div>
-                    <div class="product-card bg-white p-4 rounded-lg shadow border border-gray-100 flex flex-col items-center text-center">
-                        <img src="https://placehold.co/200x150/B0E0E6/000000?text=Eco+Poop+Bags" alt="Eco-Friendly Poop Bags" class="w-full h-auto object-cover rounded-md mb-2">
-                        <p class="font-bold text-gray-900">Eco-Friendly Biodegradable Poop Bags with Dispenser</p>
-                        <p class="text-sm text-gray-600">Sustainable and convenient solution for pet waste.</p>
-                    </div>
-                    <div class="product-card bg-white p-4 rounded-lg shadow border border-gray-100 flex flex-col items-center text-center">
-                        <img src="https://placehold.co/200x150/F5DEB3/000000?text=Pet+Carrier" alt="Stylish Pet Carrier" class="w-full h-auto object-cover rounded-md mb-2">
-                        <p class="font-bold text-gray-900">Stylish & Functional Pet Carriers/Backpacks</p>
-                        <p class="text-sm text-gray-600">Comfortable and secure transport for pets, with modern designs.</p>
-                    </div>
-                    <div class="product-card bg-white p-4 rounded-lg shadow border border-gray-100 flex flex-col items-center text-center">
-                        <img src="https://placehold.co/200x150/D3D3D3/000000?text=Ball+Launcher" alt="Automatic Ball Launcher" class="w-full h-auto object-cover rounded-md mb-2">
-                        <p class="font-bold text-gray-900">Automatic Ball Launchers for Dogs</p>
-                        <p class="text-sm text-gray-600">Keeps active dogs entertained for hours with varied launching distances.</p>
-                    </div>
+    <!-- Products Section -->
+    <section style="padding: 4rem 0; background: #f8f9fa; min-height: 600px; display: block !important; visibility: visible !important;">
+        <div class="container">
+            <h2 style="text-align: center; font-size: 2.5rem; font-weight: 700; margin-bottom: 3rem; color: #1f2937;">Our Premium Pet Products</h2>
+            
+            <!-- Product Grid -->
+            <div class="product-grid">
+            <!-- Cat Tower -->
+            <div class="product-card">
+                <div class="product-image" onclick="openProductDetail('cat-tower')">
+                    <img src="https://images.unsplash.com/photo-1574144611937-0df059b5ef3e?w=400&h=300&fit=crop" alt="Premium Cat Tower">
                 </div>
+                <h3 class="product-title" onclick="openProductDetail('cat-tower')">Premium Cat Tower</h3>
+                <p class="product-price">$89-129</p>
+                <p class="product-description">Multi-level climbing paradise with scratching posts and cozy hideouts</p>
+                <button class="add-to-cart" onclick="addToCart('Premium Cat Tower', 109)">Add to Cart</button>
+            </div>
+            
+            <!-- Bird Cage -->
+            <div class="product-card">
+                <div class="product-image" onclick="openProductDetail('bird-cage')">
+                    <img src="https://images.unsplash.com/photo-1452570053594-1b985d6ea890?w=400&h=300&fit=crop" alt="Spacious Bird Cage">
+                </div>
+                <h3 class="product-title" onclick="openProductDetail('bird-cage')">Spacious Bird Cage</h3>
+                <p class="product-price">$149-199</p>
+                <p class="product-description">Large flight cage with multiple perches and feeding stations</p>
+                <button class="add-to-cart" onclick="addToCart('Spacious Bird Cage', 174)">Add to Cart</button>
+            </div>
+            
+            <!-- Aquarium Kit -->
+            <div class="product-card">
+                <div class="product-image" onclick="openProductDetail('aquarium-kit')">
+                    <img src="https://images.unsplash.com/photo-1544551763-46a013bb70d5?w=400&h=300&fit=crop" alt="Complete Aquarium Kit">
+                </div>
+                <h3 class="product-title" onclick="openProductDetail('aquarium-kit')">Complete Aquarium Kit</h3>
+                <p class="product-price">$199-299</p>
+                <p class="product-description">20-gallon tank with LED lighting, filter, and starter accessories</p>
+                <button class="add-to-cart" onclick="addToCart('Complete Aquarium Kit', 249)">Add to Cart</button>
+            </div>
+            
+            <!-- Rabbit Habitat -->
+            <div class="product-card">
+                <div class="product-image" onclick="openProductDetail('rabbit-habitat')">
+                    <img src="https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?w=400&h=300&fit=crop" alt="Rabbit Habitat">
+                </div>
+                <h3 class="product-title" onclick="openProductDetail('rabbit-habitat')">Deluxe Rabbit Habitat</h3>
+                <p class="product-price">$179-249</p>
+                <p class="product-description">Spacious indoor/outdoor hutch with multiple levels and ramps</p>
+                <button class="add-to-cart" onclick="addToCart('Deluxe Rabbit Habitat', 214)">Add to Cart</button>
+            </div>
+            
+            <!-- Multi-Pet Carrier -->
+            <div class="product-card">
+                <div class="product-image" onclick="openProductDetail('pet-carrier')">
+                    <img src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=400&h=300&fit=crop" alt="Multi-Pet Carrier">
+                </div>
+                <h3 class="product-title" onclick="openProductDetail('pet-carrier')">Universal Pet Carrier</h3>
+                <p class="product-price">$59-89</p>
+                <p class="product-description">Airline-approved carrier suitable for cats, small dogs, and rabbits</p>
+                <button class="add-to-cart" onclick="addToCart('Universal Pet Carrier', 74)">Add to Cart</button>
+            </div>
+            
+            <!-- Reptile Terrarium -->
+            <div class="product-card">
+                <div class="product-image" onclick="openProductDetail('reptile-terrarium')">
+                    <img src="https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=300&fit=crop" alt="Reptile Terrarium">
+                </div>
+                <h3 class="product-title" onclick="openProductDetail('reptile-terrarium')">Reptile Terrarium Setup</h3>
+                <p class="product-price">$229-329</p>
+                <p class="product-description">Complete habitat with heating, lighting, and humidity control</p>
+                <button class="add-to-cart" onclick="addToCart('Reptile Terrarium Setup', 279)">Add to Cart</button>
+            </div>
+            
+            <!-- Smart Feeder -->
+            <div class="product-card">
+                <div class="product-image" onclick="openProductDetail('smart-feeder')">
+                    <img src="https://images.unsplash.com/photo-1589941013453-ec89f33b5e95?w=400&h=300&fit=crop" alt="Smart Pet Feeder">
+                </div>
+                <h3 class="product-title" onclick="openProductDetail('smart-feeder')">Smart Pet Feeder</h3>
+                <p class="product-price">$119-169</p>
+                <p class="product-description">App-controlled automatic feeder for dogs, cats, and small pets</p>
+                <button class="add-to-cart" onclick="addToCart('Smart Pet Feeder', 144)">Add to Cart</button>
+            </div>
+            
+            <!-- Premium Litter System -->
+            <div class="product-card">
+                <div class="product-image" onclick="openProductDetail('litter-system')">
+                    <img src="https://images.unsplash.com/photo-1514888286974-6c03e2ca1dba?w=400&h=300&fit=crop" alt="Premium Litter System">
+                </div>
+                <h3 class="product-title" onclick="openProductDetail('litter-system')">Self-Cleaning Litter System</h3>
+                <p class="product-price">$299-399</p>
+                <p class="product-description">Automated cleaning with odor control for cats and small animals</p>
+                <button class="add-to-cart" onclick="addToCart('Self-Cleaning Litter System', 349)">Add to Cart</button>
+            </div>
+            
+            <!-- Universal Grooming Kit -->
+            <div class="product-card">
+                <div class="product-image" onclick="openProductDetail('grooming-kit')">
+                    <img src="https://images.unsplash.com/photo-1601758003122-53c40e686a19?w=400&h=300&fit=crop" alt="Universal Grooming Kit">
+                </div>
+                <h3 class="product-title" onclick="openProductDetail('grooming-kit')">Universal Grooming Kit</h3>
+                <p class="product-price">$79-119</p>
+                <p class="product-description">Complete grooming set for dogs, cats, rabbits, and small pets</p>
+                <button class="add-to-cart" onclick="addToCart('Universal Grooming Kit', 99)">Add to Cart</button>
+            </div>
+            </div>
+        </div>
+    </section>
 
-                <h3 class="text-xl font-semibold text-blue-800 mt-8 mb-4">Personalized Glow-in-the-Dark Dog Leashes:</h3>
-                <div class="bg-white p-4 rounded-lg shadow border border-gray-100 flex flex-col sm:flex-row items-center sm:items-start text-center sm:text-left">
-                    <img src="https://placehold.co/250x180/ADD8E6/000000?text=Glow+Leash+Proto1" alt="Glow-in-the-Dark Leash Prototype 1" class="w-48 sm:w-1/3 h-auto object-cover rounded-md mb-4 sm:mb-0 sm:mr-4">
-                    <div class="flex-grow">
-                        <p class="font-bold text-gray-900 text-lg mb-2">Your Pet's Name, Glowing Bright!</p>
-                        <p class="text-gray-700 mb-2">
+    <!-- Additional Content Section -->
+    <section style="padding: 4rem 0; background: #f9fafb;">
+        <div class="container">
+            <h3 style="font-size: 1.5rem; font-weight: 600; color: #1e40af; margin: 2rem 0 1rem 0;">Personalized Glow-in-the-Dark Dog Leashes:</h3>
+                <div style="background: white; padding: 1rem; border-radius: 0.5rem; box-shadow: 0 1px 3px rgba(0,0,0,0.1); border: 1px solid #f3f4f6; display: flex; flex-direction: column; align-items: center; text-align: center;">
+                    <img src="https://placehold.co/250x180/ADD8E6/000000?text=Glow+Leash+Proto1" alt="Glow-in-the-Dark Leash Prototype 1" style="width: 12rem; height: auto; object-fit: cover; border-radius: 0.375rem; margin-bottom: 1rem;">
+                    <div style="flex-grow: 1;">
+                        <p style="font-weight: 700; color: #111827; font-size: 1.125rem; margin-bottom: 0.5rem;">Your Pet's Name, Glowing Bright!</p>
+                        <p style="color: #374151; margin-bottom: 0.5rem;">
                             Imagine dog leashes that not only ensure safety during evening walks by glowing brightly, but also proudly display your dog's name! These leashes feature embedded LED lights or special glow-in-the-dark material, making your pet visible and stylish.
                         </p>
-                        <p class="text-gray-700 italic">
+                        <p style="color: #374151; font-style: italic;">
                             (Prototype images would show leashes with custom names, various glowing colors, and strong, reflective materials.)
                         </p>
-                        <p class="text-gray-800 font-semibold mt-3">Estimated Manufacturing/Sourcing Cost: <span class="text-green-600">$5 - $15 USD per leash (in bulk)</span></p>
-                        <p class="text-gray-600 text-sm mt-1">
+                        <p style="color: #1f2937; font-weight: 600; margin-top: 0.75rem;">Estimated Manufacturing/Sourcing Cost: <span style="color: #059669;">$5 - $15 USD per leash (in bulk)</span></p>
+                        <p style="color: #4b5563; font-size: 0.875rem; margin-top: 0.25rem;">
                             This cost depends on the quality of materials, type of glowing mechanism (LED vs. phosphorescent fabric), personalization method (embroidery, print), and order quantity.
                         </p>
                     </div>
@@ -163,28 +498,388 @@
                 </ul>
             </div>
 
-            <!-- "Postpaid" Community Showcase Section -->
-            <div class="bg-yellow-50 p-6 rounded-lg shadow-md border border-yellow-200">
-                <h2 class="text-2xl font-semibold text-yellow-800 mb-3">🐾 PetPost: Share Your Joy! 📸</h2>
-                <p class="text-gray-700 leading-relaxed mb-4">
-                    Imagine a special place on our website where you, our amazing customers, can share photos of your beloved pets enjoying the products you've purchased from us!
-                </p>
-                <p class="text-gray-700 mb-4">
-                    This "PetPost" (or "Postpaid" as you called it!) section would be a vibrant community hub. After you buy a fabulous new glow-in-the-dark leash or a smart feeder, you could upload a picture of your furry friend using it.
-                </p>
-                <p class="text-gray-700 font-semibold">
-                    Why is this great?
-                </p>
-                <ul class="list-disc list-inside text-gray-600 mb-4 space-y-1">
-                    <li><strong class="text-gray-800">Showcase your pet:</strong> Let the world see how happy your pet is with their new gear!</li>
-                    <li><strong class="text-gray-800">Build community:</strong> Connect with other pet owners and see their adorable companions.</li>
-                    <li><strong class="text-gray-800">Inspire others:</strong> Help new customers see our products in action with real pets.</li>
-                </ul>
-                <p class="text-gray-700 italic mt-4">
-                    (Note: This app provides a conceptual placeholder for this feature. A live "PetPost" feature would involve advanced website functionality like user accounts, image uploads, and a database to store and display photos. We'll discuss how to achieve this on an easy-to-use e-commerce platform below!)
-                </p>
+    </div>
+
+    <!-- Cart Modal -->
+    <div id="cart-modal" class="cart-modal">
+        <div class="cart-content">
+            <div class="cart-header">
+                <h2>Shopping Cart</h2>
+                <span class="close-cart" onclick="closeCart()">&times;</span>
+            </div>
+            <div id="cart-items"></div>
+            <div class="cart-total">
+                <h3>Total: $<span id="cart-total">0.00</span></h3>
+                <button class="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
             </div>
         </div>
     </div>
+
+    <!-- Product Detail Modal -->
+    <div id="productModal" class="cart-modal">
+        <div class="cart-content">
+            <div class="cart-header">
+                <h2 id="productDetailTitle">Product Details</h2>
+                <span class="close-cart" onclick="closeProductDetail()">&times;</span>
+            </div>
+            <div id="productDetailContent"></div>
+        </div>
+    </div>
+
+    <script>
+        console.log('Script loading...');
+        
+        // Debug: Check if products are visible
+        window.addEventListener('DOMContentLoaded', function() {
+            console.log('DOM loaded');
+            const productGrid = document.querySelector('.product-grid');
+            const productCards = document.querySelectorAll('.product-card');
+            console.log('Product grid found:', productGrid);
+            console.log('Product cards found:', productCards.length);
+            
+            if (productGrid) {
+                console.log('Product grid styles:', window.getComputedStyle(productGrid));
+            }
+        });
+        
+        let cart = [];
+        let cartCount = 0;
+        let cartTotal = 0;
+
+        function addToCart(productName, price) {
+            cart.push({ name: productName, price: price });
+            cartCount++;
+            cartTotal += price;
+            
+            document.getElementById('cart-count').textContent = cartCount;
+            updateCartDisplay();
+            
+            // Show success message
+            showSuccessMessage(`${productName} added to cart!`);
+        }
+
+        function updateCartDisplay() {
+            const cartItemsContainer = document.getElementById('cart-items');
+            cartItemsContainer.innerHTML = '';
+            
+            cart.forEach((item, index) => {
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <span>${item.name}</span>
+                    <span>$${item.price}</span>
+                    <button onclick="removeFromCart(${index})" style="background: #dc2626; color: white; border: none; padding: 0.25rem 0.5rem; border-radius: 0.25rem; cursor: pointer;">Remove</button>
+                `;
+                cartItemsContainer.appendChild(cartItem);
+            });
+            
+            document.getElementById('cart-total').textContent = cartTotal.toFixed(2);
+        }
+
+        function removeFromCart(index) {
+            cartTotal -= cart[index].price;
+            cart.splice(index, 1);
+            cartCount--;
+            
+            document.getElementById('cart-count').textContent = cartCount;
+            updateCartDisplay();
+        }
+
+        function openCart() {
+            document.getElementById('cart-modal').style.display = 'block';
+        }
+
+        function closeCart() {
+            document.getElementById('cart-modal').style.display = 'none';
+        }
+
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+            
+            alert(`Thank you for your purchase! Total: $${cartTotal.toFixed(2)}`);
+            cart = [];
+            cartCount = 0;
+            cartTotal = 0;
+            
+            document.getElementById('cart-count').textContent = cartCount;
+            updateCartDisplay();
+            closeCart();
+        }
+
+        function showSuccessMessage(message) {
+            const successDiv = document.createElement('div');
+            successDiv.className = 'success-message';
+            successDiv.textContent = message;
+            
+            document.body.appendChild(successDiv);
+            
+            setTimeout(() => {
+                document.body.removeChild(successDiv);
+            }, 3000);
+        }
+
+        // Products are loading correctly
+        
+        function openProductDetail(productId) {
+             const productDetails = {
+                 'cat-tower': {
+                     title: 'Premium Cat Tower',
+                     price: '$149-199',
+                     image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjZjNmNGY2Ii8+CjxyZWN0IHg9IjEwMCIgeT0iMjAwIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjgwIiByeD0iMTAiIGZpbGw9IiM4YjVjZjYiLz4KPHJlY3QgeD0iMTIwIiB5PSIxMjAiIHdpZHRoPSIxNjAiIGhlaWdodD0iODAiIHJ4PSIxMCIgZmlsbD0iIzY2NjZmZiIvPgo8cmVjdCB4PSIxNDAiIHk9IjQwIiB3aWR0aD0iMTIwIiBoZWlnaHQ9IjgwIiByeD0iMTAiIGZpbGw9IiM0YzFkOTUiLz4KPHN2ZyB4PSIxODAiIHk9IjE0MCIgd2lkdGg9IjQwIiBoZWlnaHQ9IjQwIj4KPGNpcmNsZSBjeD0iMjAiIGN5PSIyMCIgcj0iMTUiIGZpbGw9IiNmZmY3ZWQiLz4KPGNpcmNsZSBjeD0iMTUiIGN5PSIxNSIgcj0iMyIgZmlsbD0iIzAwMCIvPgo8Y2lyY2xlIGN4PSIyNSIgY3k9IjE1IiByPSIzIiBmaWxsPSIjMDAwIi8+Cjx0cmlhbmdsZSBjeD0iMjAiIGN5PSIyNSIgcj0iMiIgZmlsbD0iI2ZmNjk5NCIvPgo8L3N2Zz4KPHRleHQgeD0iMjAwIiB5PSIyODAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM0YzFkOTUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxOCIgZm9udC13ZWlnaHQ9ImJvbGQiPkNhdCBUb3dlcjwvdGV4dD4KPC9zdmc+',
+                     description: 'Multi-level climbing paradise with scratching posts and cozy hideouts',
+                     features: [
+                         'Height: 72 inches - perfect for active cats',
+                         '6 levels with multiple platforms',
+                         '3 sisal scratching posts',
+                         '2 cozy hideout condos',
+                         'Plush carpet covering',
+                         'Stable wide base design',
+                         'Easy assembly with included tools'
+                     ],
+                     specifications: {
+                         'Material': 'Engineered wood with carpet',
+                         'Dimensions': '24" L x 16" W x 72" H',
+                         'Weight Capacity': '50 lbs per level',
+                         'Assembly Time': '45-60 minutes'
+                     },
+                     cartPrice: 109
+                 },
+                 'bird-cage': {
+                     title: 'Spacious Bird Cage',
+                     price: '$89-129',
+                     image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjZjNmNGY2Ii8+CjxyZWN0IHg9IjEwMCIgeT0iNjAiIHdpZHRoPSIyMDAiIGhlaWdodD0iMTgwIiByeD0iMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzM3NDE1MSIgc3Ryb2tlLXdpZHRoPSIzIi8+CjxsaW5lIHgxPSIxMjAiIHkxPSI2MCIgeDI9IjEyMCIgeTI9IjI0MCIgc3Ryb2tlPSIjMzc0MTUxIiBzdHJva2Utd2lkdGg9IjIiLz4KPGxpbmUgeDE9IjE0MCIgeTE9IjYwIiB4Mj0iMTQwIiB5Mj0iMjQwIiBzdHJva2U9IiMzNzQxNTEiIHN0cm9rZS13aWR0aD0iMiIvPgo8bGluZSB4MT0iMTYwIiB5MT0iNjAiIHgyPSIxNjAiIHkyPSIyNDAiIHN0cm9rZT0iIzM3NDE1MSIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxsaW5lIHgxPSIxODAiIHkxPSI2MCIgeDI9IjE4MCIgeTI9IjI0MCIgc3Ryb2tlPSIjMzc0MTUxIiBzdHJva2Utd2lkdGg9IjIiLz4KPGxpbmUgeDE9IjIwMCIgeTE9IjYwIiB4Mj0iMjAwIiB5Mj0iMjQwIiBzdHJva2U9IiMzNzQxNTEiIHN0cm9rZS13aWR0aD0iMiIvPgo8bGluZSB4MT0iMjIwIiB5MT0iNjAiIHgyPSIyMjAiIHkyPSIyNDAiIHN0cm9rZT0iIzM3NDE1MSIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxsaW5lIHgxPSIyNDAiIHkxPSI2MCIgeDI9IjI0MCIgeTI9IjI0MCIgc3Ryb2tlPSIjMzc0MTUxIiBzdHJva2Utd2lkdGg9IjIiLz4KPGxpbmUgeDE9IjI2MCIgeTE9IjYwIiB4Mj0iMjYwIiB5Mj0iMjQwIiBzdHJva2U9IiMzNzQxNTEiIHN0cm9rZS13aWR0aD0iMiIvPgo8bGluZSB4MT0iMjgwIiB5MT0iNjAiIHgyPSIyODAiIHkyPSIyNDAiIHN0cm9rZT0iIzM3NDE1MSIgc3Ryb2tlLXdpZHRoPSIyIi8+CjxjaXJjbGUgY3g9IjE3MCIgY3k9IjEzMCIgcj0iMTIiIGZpbGw9IiNmZmQ3MDAiLz4KPGNpcmNsZSBjeD0iMTY1IiBjeT0iMTI1IiByPSIyIiBmaWxsPSIjMDAwIi8+CjxwYXRoIGQ9Im0xNzUgMTI1IGMwIDUgLTUgNSAtNSAwIiBmaWxsPSIjZmY2OTk0Ii8+Cjx0ZXh0IHg9IjIwMCIgeT0iMjgwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjMzc0MTUxIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTgiIGZvbnQtd2VpZ2h0PSJib2xkIj5CaXJkIENhZ2U8L3RleHQ+Cjwvc3ZnPg==',
+                     description: 'Large flight cage with multiple perches and feeding stations',
+                     features: [
+                         'Dimensions: 32" W x 18" D x 40" H',
+                         'Powder-coated steel construction',
+                         '4 wooden perches included',
+                         '2 stainless steel feeding cups',
+                         'Easy-clean slide-out tray',
+                         'Large front door with secure latch',
+                         'Suitable for medium to large birds'
+                     ],
+                     specifications: {
+                         'Material': 'Powder-coated steel',
+                         'Bar Spacing': '5/8 inch',
+                         'Weight': '45 lbs',
+                         'Assembly': 'Required (tools included)'
+                     },
+                     cartPrice: 174
+                 },
+                 'aquarium-kit': {
+                     title: 'Complete Aquarium Kit',
+                     price: '$179-249',
+                     image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjZjNmNGY2Ii8+CjxyZWN0IHg9IjgwIiB5PSI4MCIgd2lkdGg9IjI0MCIgaGVpZ2h0PSIxNDAiIHJ4PSI4IiBmaWxsPSIjMDZiNmQ0IiBvcGFjaXR5PSIwLjMiLz4KPHJlY3QgeD0iODAiIHk9IjgwIiB3aWR0aD0iMjQwIiBoZWlnaHQ9IjE0MCIgcng9IjgiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzM3NDE1MSIgc3Ryb2tlLXdpZHRoPSIzIi8+CjxyZWN0IHg9IjkwIiB5PSIyMDAiIHdpZHRoPSI2MCIgaGVpZ2h0PSIxNSIgZmlsbD0iIzY1YTMwZCIvPgo8cmVjdCB4PSIyNTAiIHk9IjIwMCIgd2lkdGg9IjYwIiBoZWlnaHQ9IjE1IiBmaWxsPSIjNjVhMzBkIi8+CjxjaXJjbGUgY3g9IjE1MCIgY3k9IjE0MCIgcj0iOCIgZmlsbD0iI2ZmZDcwMCIvPgo8Y2lyY2xlIGN4PSIyMDAiIGN5PSIxNjAiIHI9IjYiIGZpbGw9IiNmZjY5OTQiLz4KPGNpcmNsZSBjeD0iMjUwIiBjeT0iMTMwIiByPSI3IiBmaWxsPSIjMDZiNmQ0Ii8+CjxwYXRoIGQ9Im0xMzAgMTgwIGMxMCAtNSAyMCAtNSAzMCAwIGMxMCA1IDIwIDUgMzAgMCIgc3Ryb2tlPSIjNjVhMzBkIiBzdHJva2Utd2lkdGg9IjIiIGZpbGw9Im5vbmUiLz4KPHRleHQgeD0iMjAwIiB5PSIyODAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiMwNmI2ZDQiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxOCIgZm9udC13ZWlnaHQ9ImJvbGQiPkFxdWFyaXVtIEtpdDwvdGV4dD4KPC9zdmc+',
+                     description: 'All-in-one aquarium setup with filtration, lighting, and accessories',
+                     features: [
+                         '40-gallon glass tank',
+                         'LED lighting system with timer',
+                         'Multi-stage filtration system',
+                         'Heater with temperature control',
+                         'Gravel, plants, and decorations included',
+                         'Water conditioner and fish food starter pack',
+                         'Complete setup guide included'
+                     ],
+                     specifications: {
+                         'Tank Size': '40 gallons (36" L x 18" W x 16" H)',
+                         'Material': 'Tempered glass',
+                         'Filter Type': 'Hang-on-back with bio-media',
+                         'Lighting': 'Full spectrum LED'
+                     },
+                     cartPrice: 249
+                 },
+                 'rabbit-habitat': {
+                     title: 'Rabbit Habitat',
+                     price: '$189-249',
+                     image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjZjNmNGY2Ii8+CjxyZWN0IHg9IjgwIiB5PSIxMDAiIHdpZHRoPSIyNDAiIGhlaWdodD0iMTIwIiByeD0iOCIgZmlsbD0iIzY1YTMwZCIgb3BhY2l0eT0iMC4yIi8+CjxyZWN0IHg9IjgwIiB5PSIxMDAiIHdpZHRoPSIyNDAiIGhlaWdodD0iMTIwIiByeD0iOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMzc0MTUxIiBzdHJva2Utd2lkdGg9IjMiLz4KPGxpbmUgeDE9IjE2MCIgeTE9IjEwMCIgeDI9IjE2MCIgeTI9IjIyMCIgc3Ryb2tlPSIjMzc0MTUxIiBzdHJva2Utd2lkdGg9IjIiLz4KPHJlY3QgeD0iOTAiIHk9IjE4MCIgd2lkdGg9IjYwIiBoZWlnaHQ9IjMwIiByeD0iNSIgZmlsbD0iIzkyNDAwZSIvPgo8Y2lyY2xlIGN4PSIyMDAiIGN5PSIxNTAiIHI9IjE1IiBmaWxsPSIjZmZmN2VkIi8+CjxjaXJjbGUgY3g9IjE5NSIgY3k9IjE0NSIgcj0iMyIgZmlsbD0iIzAwMCIvPgo8Y2lyY2xlIGN4PSIyMDUiIGN5PSIxNDUiIHI9IjMiIGZpbGw9IiMwMDAiLz4KPGVsbGlwc2UgY3g9IjE5NSIgY3k9IjEzNSIgcng9IjgiIHJ5PSIxNSIgZmlsbD0iI2ZmZjdlZCIvPgo8ZWxsaXBzZSBjeD0iMjA1IiBjeT0iMTM1IiByeD0iOCIgcnk9IjE1IiBmaWxsPSIjZmZmN2VkIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMjgwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjNjVhMzBkIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTgiIGZvbnQtd2VpZ2h0PSJib2xkIj5SYWJiaXQgSGFiaXRhdDwvdGV4dD4KPC9zdmc+',
+                     description: 'Spacious multi-level home with play area and feeding station',
+                     features: [
+                         'Two-story design with ramp access',
+                         'Dimensions: 48" L x 24" W x 36" H',
+                         'Removable bottom tray for easy cleaning',
+                         'Hay feeder and water bottle included',
+                         'Secure latches on all doors',
+                         'Weather-resistant for indoor/outdoor use',
+                         'Assembly hardware and tools included'
+                     ],
+                     specifications: {
+                         'Material': 'Galvanized steel wire with wood frame',
+                         'Floor Space': '8 square feet',
+                         'Weight': '55 lbs',
+                         'Suitable For': 'Rabbits, guinea pigs, ferrets'
+                     },
+                     cartPrice: 214
+                 },
+                 'pet-carrier': {
+                     title: 'Universal Pet Carrier',
+                     price: '$59-89',
+                     image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjZjNmNGY2Ii8+CjxyZWN0IHg9IjEwMCIgeT0iMTIwIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjEwMCIgcng9IjE1IiBmaWxsPSIjMzc0MTUxIi8+CjxyZWN0IHg9IjExMCIgeT0iMTMwIiB3aWR0aD0iMTgwIiBoZWlnaHQ9IjgwIiByeD0iMTAiIGZpbGw9Im5vbmUiIHN0cm9rZT0iIzY2NjZmZiIgc3Ryb2tlLXdpZHRoPSIyIiBzdHJva2UtZGFzaGFycmF5PSI1LDUiLz4KPGNpcmNsZSBjeD0iMTMwIiBjeT0iMTAwIiByPSI4IiBmaWxsPSIjOTI0MDBkIi8+CjxsaW5lIHgxPSIxMzAiIHkxPSI5MiIgeDI9IjEzMCIgeTI9IjEyMCIgc3Ryb2tlPSIjOTI0MDBkIiBzdHJva2Utd2lkdGg9IjMiLz4KPGNpcmNsZSBjeD0iMjcwIiBjeT0iMTAwIiByPSI4IiBmaWxsPSIjOTI0MDBkIi8+CjxsaW5lIHgxPSIyNzAiIHkxPSI5MiIgeDI9IjI3MCIgeTI9IjEyMCIgc3Ryb2tlPSIjOTI0MDBkIiBzdHJva2Utd2lkdGg9IjMiLz4KPGNpcmNsZSBjeD0iMTcwIiBjeT0iMTcwIiByPSIxMiIgZmlsbD0iI2ZmZjdlZCIvPgo8Y2lyY2xlIGN4PSIxNjUiIGN5PSIxNjUiIHI9IjIiIGZpbGw9IiMwMDAiLz4KPGNpcmNsZSBjeD0iMTc1IiBjeT0iMTY1IiByPSIyIiBmaWxsPSIjMDAwIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMjgwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjMzc0MTUxIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTgiIGZvbnQtd2VpZ2h0PSJib2xkIj5QZXQgQ2FycmllcjwvdGV4dD4KPC9zdmc+',
+                     description: 'Airline-approved carrier for safe and comfortable travel',
+                     features: [
+                         'Airline approved for in-cabin travel',
+                         'Soft-sided with mesh ventilation panels',
+                         'Removable fleece pad for comfort',
+                         'Multiple carrying options (hand, shoulder)',
+                         'Collapsible for easy storage',
+                         'Side and top entry points',
+                         'Suitable for cats and small dogs up to 15 lbs'
+                     ],
+                     specifications: {
+                         'Dimensions': '18" L x 11" W x 11" H',
+                         'Material': 'Durable nylon with mesh panels',
+                         'Weight Limit': '15 lbs',
+                         'Colors': 'Black, Navy, Gray'
+                     },
+                     cartPrice: 74
+                 },
+                 'reptile-terrarium': {
+                     title: 'Reptile Terrarium Setup',
+                     price: '$229-329',
+                     image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjZjNmNGY2Ii8+CjxyZWN0IHg9IjgwIiB5PSIxMDAiIHdpZHRoPSIyNDAiIGhlaWdodD0iMTIwIiByeD0iOCIgZmlsbD0iIzY1YTMwZCIgb3BhY2l0eT0iMC4xIi8+CjxyZWN0IHg9IjgwIiB5PSIxMDAiIHdpZHRoPSIyNDAiIGhlaWdodD0iMTIwIiByeD0iOCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjMzc0MTUxIiBzdHJva2Utd2lkdGg9IjMiLz4KPHJlY3QgeD0iOTAiIHk9IjIwMCIgd2lkdGg9IjIyMCIgaGVpZ2h0PSIxNSIgZmlsbD0iIzkyNDAwZSIvPgo8Y2lyY2xlIGN4PSIxMzAiIGN5PSIxODAiIHI9IjE1IiBmaWxsPSIjNjVhMzBkIi8+CjxjaXJjbGUgY3g9IjE4MCIgY3k9IjE5MCIgcj0iMTAiIGZpbGw9IiM5MjQwMGUiLz4KPGNpcmNsZSBjeD0iMjUwIiBjeT0iMTcwIiByPSIxMiIgZmlsbD0iIzY1YTMwZCIvPgo8ZWxsaXBzZSBjeD0iMjAwIiBjeT0iMTUwIiByeD0iMjAiIHJ5PSI4IiBmaWxsPSIjMDZiNmQ0IiBvcGFjaXR5PSIwLjUiLz4KPGNpcmNsZSBjeD0iMjgwIiBjeT0iODAiIHI9IjE1IiBmaWxsPSIjZmZkNzAwIiBvcGFjaXR5PSIwLjgiLz4KPHRleHQgeD0iMjAwIiB5PSIyODAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM2NWEzMGQiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxOCIgZm9udC13ZWlnaHQ9ImJvbGQiPlJlcHRpbGUgVGVycmFyaXVtPC90ZXh0Pgo8L3N2Zz4=',
+                     description: 'Complete habitat with heating, lighting, and humidity control',
+                     features: [
+                         '40-gallon glass terrarium with screen top',
+                         'UVB and heat lamp fixtures included',
+                         'Digital thermometer and hygrometer',
+                         'Substrate, hiding spots, and water dish',
+                         'Day/night timer for lighting cycle',
+                         'Under-tank heater with thermostat',
+                         'Setup guide for various reptile species'
+                     ],
+                     specifications: {
+                         'Tank Size': '40 gallons (36" L x 18" W x 18" H)',
+                         'Material': 'Glass with aluminum screen top',
+                         'Heating': 'Ceramic heat emitter + UTH',
+                         'Lighting': 'UVB tube + basking bulb'
+                     },
+                     cartPrice: 279
+                 },
+                 'smart-feeder': {
+                     title: 'Smart Pet Feeder',
+                     price: '$119-169',
+                     image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjZjNmNGY2Ii8+CjxyZWN0IHg9IjEyMCIgeT0iODAiIHdpZHRoPSIxNjAiIGhlaWdodD0iMTQwIiByeD0iMTUiIGZpbGw9IiNmZmZmZmYiIHN0cm9rZT0iIzM3NDE1MSIgc3Ryb2tlLXdpZHRoPSIzIi8+CjxyZWN0IHg9IjE0MCIgeT0iMTAwIiB3aWR0aD0iMTIwIiBoZWlnaHQ9IjgwIiByeD0iMTAiIGZpbGw9IiNmM2Y0ZjYiLz4KPGNpcmNsZSBjeD0iMjAwIiBjeT0iMTQwIiByPSIzMCIgZmlsbD0ibm9uZSIgc3Ryb2tlPSIjNjY2NmZmIiBzdHJva2Utd2lkdGg9IjIiLz4KPGNpcmNsZSBjeD0iMjAwIiBjeT0iMTQwIiByPSI4IiBmaWxsPSIjNjY2NmZmIi8+CjxyZWN0IHg9IjE2MCIgeT0iMjAwIiB3aWR0aD0iODAiIGhlaWdodD0iMTUiIHJ4PSI3IiBmaWxsPSIjOTI0MDBkIi8+CjxyZWN0IHg9IjE4MCIgeT0iNjAiIHdpZHRoPSI0MCIgaGVpZ2h0PSIyMCIgcng9IjEwIiBmaWxsPSIjNjY2NmZmIi8+CjxjaXJjbGUgY3g9IjE1MCIgY3k9IjEyMCIgcj0iNSIgZmlsbD0iI2ZmZDcwMCIvPgo8Y2lyY2xlIGN4PSIyNTAiIGN5PSIxMjAiIHI9IjUiIGZpbGw9IiNmZmQ3MDAiLz4KPHRleHQgeD0iMjAwIiB5PSIyODAiIHRleHQtYW5jaG9yPSJtaWRkbGUiIGZpbGw9IiM2NjY2ZmYiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxOCIgZm9udC13ZWlnaHQ9ImJvbGQiPlNtYXJ0IEZlZWRlcjwvdGV4dD4KPC9zdmc+',
+                     description: 'App-controlled automatic feeder for dogs, cats, and small pets',
+                     features: [
+                         'WiFi-enabled with smartphone app control',
+                         'Programmable feeding schedule (up to 6 meals/day)',
+                         'Portion control (1/8 cup to 4 cups per meal)',
+                         '6-liter food storage capacity',
+                         'Voice recording for meal calls',
+                         'Battery backup for power outages',
+                         'Stainless steel food bowl included'
+                     ],
+                     specifications: {
+                         'Capacity': '6 liters (25 cups)',
+                         'Power': 'AC adapter + 3 D batteries backup',
+                         'Connectivity': '2.4GHz WiFi',
+                         'App': 'iOS and Android compatible'
+                     },
+                     cartPrice: 144
+                 },
+                 'litter-system': {
+                     title: 'Self-Cleaning Litter System',
+                     price: '$299-399',
+                     image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjZjNmNGY2Ii8+CjxyZWN0IHg9IjgwIiB5PSIxMjAiIHdpZHRoPSIyNDAiIGhlaWdodD0iMTAwIiByeD0iMTUiIGZpbGw9IiNmZmZmZmYiIHN0cm9rZT0iIzM3NDE1MSIgc3Ryb2tlLXdpZHRoPSIzIi8+CjxyZWN0IHg9IjEwMCIgeT0iMTgwIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjMwIiByeD0iNSIgZmlsbD0iIzkyNDAwZSIgb3BhY2l0eT0iMC4zIi8+CjxyZWN0IHg9IjI4MCIgeT0iMTAwIiB3aWR0aD0iMzAiIGhlaWdodD0iNDAiIHJ4PSI1IiBmaWxsPSIjMzc0MTUxIi8+CjxjaXJjbGUgY3g9IjI5NSIgY3k9IjkwIiByPSI4IiBmaWxsPSIjZmZkNzAwIi8+CjxsaW5lIHgxPSIxMjAiIHkxPSIxNDAiIHgyPSIyODAiIHkyPSIxNDAiIHN0cm9rZT0iIzY2NjZmZiIgc3Ryb2tlLXdpZHRoPSIzIi8+CjxsaW5lIHgxPSIxMjAiIHkxPSIxNjAiIHgyPSIyODAiIHkyPSIxNjAiIHN0cm9rZT0iIzY2NjZmZiIgc3Ryb2tlLXdpZHRoPSIzIi8+CjxjaXJjbGUgY3g9IjE1MCIgY3k9IjE5NSIgcj0iOCIgZmlsbD0iIzkyNDAwZSIvPgo8Y2lyY2xlIGN4PSIyMDAiIGN5PSIxOTUiIHI9IjgiIGZpbGw9IiM5MjQwMGUiLz4KPGNpcmNsZSBjeD0iMjUwIiBjeT0iMTk1IiByPSI4IiBmaWxsPSIjOTI0MDBkIi8+Cjx0ZXh0IHg9IjIwMCIgeT0iMjgwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjMzc0MTUxIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTgiIGZvbnQtd2VpZ2h0PSJib2xkIj5TZWxmLUNsZWFuaW5nIExpdHRlcjwvdGV4dD4KPC9zdmc+',
+                     description: 'Automated cleaning with odor control for cats and small animals',
+                     features: [
+                         'Automatic rake system cleans after each use',
+                         'Sealed waste compartment with odor control',
+                         'Compatible with clumping and crystal litters',
+                         'Adjustable timer (5, 10, or 20 minutes)',
+                         'Safety sensors prevent operation when pet is present',
+                         'Easy-empty waste receptacle',
+                         'Quiet operation (under 40dB)'
+                     ],
+                     specifications: {
+                         'Dimensions': '27" L x 19" W x 7" H',
+                         'Weight': '18 lbs',
+                         'Power': '15W motor with AC adapter',
+                         'Suitable For': 'Cats 6 months and older'
+                     },
+                     cartPrice: 349
+                 },
+                 'grooming-kit': {
+                     title: 'Professional Grooming Kit',
+                     price: '$79-119',
+                     image: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iNDAwIiBoZWlnaHQ9IjMwMCIgdmlld0JveD0iMCAwIDQwMCAzMDAiIGZpbGw9Im5vbmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyI+CjxyZWN0IHdpZHRoPSI0MDAiIGhlaWdodD0iMzAwIiBmaWxsPSIjZjNmNGY2Ii8+CjxyZWN0IHg9IjEwMCIgeT0iMTAwIiB3aWR0aD0iMjAwIiBoZWlnaHQ9IjEwMCIgcng9IjEwIiBmaWxsPSIjOTI0MDBkIi8+CjxyZWN0IHg9IjEyMCIgeT0iODAiIHdpZHRoPSIyMCIgaGVpZ2h0PSI4MCIgcng9IjMiIGZpbGw9IiMzNzQxNTEiLz4KPHJlY3QgeD0iMTUwIiB5PSI5MCIgd2lkdGg9IjE1IiBoZWlnaHQ9IjcwIiByeD0iMyIgZmlsbD0iIzM3NDE1MSIvPgo8cmVjdCB4PSIxNzUiIHk9Ijg1IiB3aWR0aD0iMTgiIGhlaWdodD0iNzUiIHJ4PSIzIiBmaWxsPSIjMzc0MTUxIi8+CjxyZWN0IHg9IjIwNSIgeT0iOTAiIHdpZHRoPSIxNSIgaGVpZ2h0PSI3MCIgcng9IjMiIGZpbGw9IiMzNzQxNTEiLz4KPHJlY3QgeD0iMjMwIiB5PSI4NSIgd2lkdGg9IjE4IiBoZWlnaHQ9Ijc1IiByeD0iMyIgZmlsbD0iIzM3NDE1MSIvPgo8cmVjdCB4PSIyNjAiIHk9IjkwIiB3aWR0aD0iMTUiIGhlaWdodD0iNzAiIHJ4PSIzIiBmaWxsPSIjMzc0MTUxIi8+CjxjaXJjbGUgY3g9IjEzMCIgY3k9IjcwIiByPSI4IiBmaWxsPSIjNjY2NmZmIi8+CjxjaXJjbGUgY3g9IjE1NyIgY3k9IjcwIiByPSI2IiBmaWxsPSIjZmZkNzAwIi8+CjxjaXJjbGUgY3g9IjE4NCIgY3k9IjcwIiByPSI3IiBmaWxsPSIjZmY2OTk0Ii8+CjxjaXJjbGUgY3g9IjIxMyIgY3k9IjcwIiByPSI2IiBmaWxsPSIjMDZiNmQ0Ii8+CjxjaXJjbGUgY3g9IjIzOSIgY3k9IjcwIiByPSI3IiBmaWxsPSIjNjVhMzBkIi8+CjxjaXJjbGUgY3g9IjI2NyIgY3k9IjcwIiByPSI2IiBmaWxsPSIjOGI1Y2Y2Ii8+Cjx0ZXh0IHg9IjIwMCIgeT0iMjgwIiB0ZXh0LWFuY2hvcj0ibWlkZGxlIiBmaWxsPSIjOTI0MDBkIiBmb250LWZhbWlseT0iQXJpYWwiIGZvbnQtc2l6ZT0iMTgiIGZvbnQtd2VpZ2h0PSJib2xkIj5Hcm9vbWluZyBLaXQ8L3RleHQ+Cjwvc3ZnPg==',
+                     description: 'Complete grooming set for dogs, cats, rabbits, and small pets',
+                     features: [
+                         'Professional-grade stainless steel tools',
+                         'Slicker brush for removing loose fur',
+                         'Pin brush for daily grooming',
+                         'Nail clippers with safety guard',
+                         'Dematting comb for tangles',
+                         'Cleaning wipes and ear care solution',
+                         'Storage case with organized compartments'
+                     ],
+                     specifications: {
+                         'Tools Included': '8 professional grooming tools',
+                         'Material': 'Stainless steel with ergonomic handles',
+                         'Case': 'Durable carrying case included',
+                         'Suitable For': 'All pet sizes and coat types'
+                     },
+                     cartPrice: 99
+                 }
+             };
+            
+            const product = productDetails[productId];
+             if (product) {
+                document.getElementById('productDetailTitle').textContent = product.title;
+                
+                const content = `
+                    <div style="text-align: center; margin-bottom: 2rem;">
+                        <img src="${product.image}" alt="${product.title}" style="width: 100%; max-width: 400px; height: 300px; object-fit: cover; border-radius: 0.75rem; margin-bottom: 1rem;">
+                        <h3 style="font-size: 1.5rem; color: #059669; margin-bottom: 1rem;">${product.price}</h3>
+                        <p style="color: #6b7280; margin-bottom: 2rem;">${product.description}</p>
+                    </div>
+                    
+                    <div style="margin-bottom: 2rem;">
+                        <h4 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; color: #1f2937;">Key Features:</h4>
+                        <ul style="list-style-type: disc; padding-left: 1.5rem; color: #6b7280;">
+                            ${product.features.map(feature => `<li style="margin-bottom: 0.5rem;">${feature}</li>`).join('')}
+                        </ul>
+                    </div>
+                    
+                    <div style="margin-bottom: 2rem;">
+                        <h4 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 1rem; color: #1f2937;">Specifications:</h4>
+                        <div style="background: #f9fafb; padding: 1rem; border-radius: 0.5rem;">
+                            ${Object.entries(product.specifications).map(([key, value]) => 
+                                `<div style="display: flex; justify-content: space-between; margin-bottom: 0.5rem; padding-bottom: 0.5rem; border-bottom: 1px solid #e5e7eb;">
+                                    <span style="font-weight: 600; color: #374151;">${key}:</span>
+                                    <span style="color: #6b7280;">${value}</span>
+                                </div>`
+                            ).join('')}
+                        </div>
+                    </div>
+                    
+                    <button class="add-to-cart" onclick="addToCart('${product.title}', ${product.cartPrice}); closeProductDetail();" style="width: 100%; margin-top: 1rem;">
+                         Add to Cart - $${product.cartPrice}
+                     </button>
+                `;
+                
+                document.getElementById('productDetailContent').innerHTML = content;
+                document.getElementById('productModal').style.display = 'block';
+            }
+        }
+        
+        function closeProductDetail() {
+            document.getElementById('productModal').style.display = 'none';
+        }
+
+        // Close modals when clicking outside
+        window.onclick = function(event) {
+            const cartModal = document.getElementById('cart-modal');
+            const productModal = document.getElementById('productModal');
+            if (event.target === cartModal) {
+                closeCart();
+            }
+            if (event.target === productModal) {
+                closeProductDetail();
+            }
+        }
+    </script>
 </body>
-</html> 
+</html>

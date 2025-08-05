@@ -1,6 +1,7 @@
 # 🏗️ Build Planning Strategy
 **Tracy Byrdsong | Pursuit L1 Cohort**  
-**Assignment Due: July 13, 2025**
+**Assignment Due: July 13, 2025**  
+**Completed: July 13, 2025**
 
 ---
 

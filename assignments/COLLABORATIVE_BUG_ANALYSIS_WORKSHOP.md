@@ -1,6 +1,7 @@
 # 🔬 Collaborative Bug Analysis Workshop
 **Tracy Byrdsong | Pursuit L1 Cohort**  
-**Assignment Due: July 27, 2025**
+**Assignment Due: July 27, 2025**  
+**Completed: July 27, 2025**
 
 ---
 

@@ -1,6 +1,7 @@
 # 🚀 MVP Practice and Sharing
 **Tracy Byrdsong | Pursuit L1 Cohort**  
-**Assignment Due: July 9, 2025**
+**Assignment Due: July 9, 2025**  
+**Completed: July 9, 2025**
 
 ---
 

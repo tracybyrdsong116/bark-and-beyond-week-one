@@ -1,6 +1,7 @@
 # 🤖 Prompt Refinement Journeys & Strategies
 **Tracy Byrdsong | Pursuit L1 Cohort**  
-**Assignment: Prof/L2L - June 24, 2025**
+**Assignment Due: June 24, 2025**  
+**Completed: June 24, 2025**
 
 ---
 

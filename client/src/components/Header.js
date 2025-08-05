@@ -20,7 +20,7 @@ const Header = () => {
     <header className="header">
       <div className="header-content">
         <Link to="/" className="logo">
-          <span className="logo-icon">🐕</span>
+          <img src="/logobb.png" alt="Bark & Beyond Tech Logo" className="logo-icon" style={{ width: '40px', height: '40px' }} />
           <span>Bark & Beyond Tech</span>
         </Link>
         

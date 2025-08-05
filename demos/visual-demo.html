@@ -3,8 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bark & Beyond Tech - Visual Demo</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>Bark & Beyond Tech - Advanced Demo Platform</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+    <meta name="description" content="Revolutionary smart pet products with AI-powered features and eco-friendly design">
+    <meta name="keywords" content="smart pet products, AI pet care, eco-friendly pet supplies, pet technology">
+    <meta property="og:title" content="Bark & Beyond Tech - Smart Pet Innovation">
+    <meta property="og:description" content="Experience the future of pet care with our AI-powered, eco-friendly smart products">
+    <meta property="og:type" content="website">
     <style>
         * {
             margin: 0;
@@ -30,7 +36,17 @@
             background: linear-gradient(135deg, #4f46e5 0%, #059669 100%);
             color: white;
             padding: 1rem 0;
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
+        }
+
+        .header.scrolled {
+            background: rgba(79, 70, 229, 0.95);
+            backdrop-filter: blur(20px);
         }
 
         .nav {
@@ -46,6 +62,23 @@
             font-weight: 700;
             text-decoration: none;
             color: white;
+            transition: transform 0.3s ease;
+        }
+
+        .logo:hover {
+            transform: scale(1.05);
+        }
+
+        .logo-icon {
+            font-size: 2rem;
+            margin-right: 0.5rem;
+            animation: bounce 2s infinite;
+        }
+
+        @keyframes bounce {
+            0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+            40% { transform: translateY(-10px); }
+            60% { transform: translateY(-5px); }
         }
 
         .logo-icon {
@@ -166,12 +199,60 @@
             border-radius: 1rem;
             padding: 1.5rem;
             box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s, box-shadow 0.3s;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            position: relative;
+            overflow: hidden;
+            border: 2px solid transparent;
+        }
+
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+            transition: left 0.5s;
         }
 
         .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 25px rgba(0, 0, 0, 0.15);
+            transform: translateY(-8px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
+            border-color: #4f46e5;
+        }
+
+        .product-card:hover::before {
+            left: 100%;
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: #059669;
+            color: white;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            z-index: 2;
+        }
+
+        .product-rating {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin: 0.5rem 0;
+        }
+
+        .stars {
+            color: #fbbf24;
+        }
+
+        .rating-text {
+            font-size: 0.875rem;
+            color: #6b7280;
         }
 
         .product-image {
@@ -207,19 +288,74 @@
         }
 
         .add-to-cart {
-            width: 100%;
-            background: #4f46e5;
+            background: linear-gradient(135deg, #4f46e5 0%, #7c3aed 100%);
             color: white;
             border: none;
-            padding: 0.75rem;
+            padding: 0.75rem 1.5rem;
             border-radius: 0.5rem;
             font-weight: 600;
             cursor: pointer;
-            transition: background 0.3s;
+            transition: all 0.3s ease;
+            width: 100%;
+            position: relative;
+            overflow: hidden;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        .add-to-cart::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #7c3aed 0%, #4f46e5 100%);
+            transition: left 0.3s ease;
+            z-index: 0;
+        }
+
+        .add-to-cart:hover::before {
+            left: 0;
         }
 
         .add-to-cart:hover {
-            background: #4338ca;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(79, 70, 229, 0.4);
+        }
+
+        .add-to-cart span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .quick-view {
+            position: absolute;
+            top: 1rem;
+            left: 1rem;
+            background: rgba(255, 255, 255, 0.9);
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            opacity: 0;
+            transform: scale(0.8);
+            transition: all 0.3s ease;
+            z-index: 2;
+        }
+
+        .product-card:hover .quick-view {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .quick-view:hover {
+            background: white;
+            transform: scale(1.1);
         }
 
         /* Features Section */
@@ -455,35 +591,79 @@
     <section class="products-section" id="products">
         <div class="container">
             <h2 class="section-title">Featured Products</h2>
-            <div class="products-grid">
+            
+            <!-- Enhanced Product Controls -->
+            <div class="product-controls" style="margin-bottom: 2rem; display: flex; gap: 1rem; flex-wrap: wrap; justify-content: center; align-items: center;">
+                <div class="search-container" style="position: relative; flex: 1; max-width: 400px;">
+                    <input type="text" id="productSearch" placeholder="🔍 Search products..." style="width: 100%; padding: 0.75rem 1rem; border: 2px solid #e5e7eb; border-radius: 0.5rem; font-size: 1rem; transition: border-color 0.3s;">
+                    <div id="searchResults" class="search-results" style="position: absolute; top: 100%; left: 0; right: 0; background: white; border: 1px solid #e5e7eb; border-radius: 0.5rem; box-shadow: 0 10px 25px rgba(0,0,0,0.1); z-index: 10; display: none; max-height: 200px; overflow-y: auto;"></div>
+                </div>
+                
+                <div class="filter-container" style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
+                    <button class="filter-btn active" data-filter="all" style="padding: 0.5rem 1rem; border: 2px solid #4f46e5; background: #4f46e5; color: white; border-radius: 0.25rem; cursor: pointer; transition: all 0.3s;">All</button>
+                    <button class="filter-btn" data-filter="smart" style="padding: 0.5rem 1rem; border: 2px solid #4f46e5; background: transparent; color: #4f46e5; border-radius: 0.25rem; cursor: pointer; transition: all 0.3s;">Smart Tech</button>
+                    <button class="filter-btn" data-filter="eco" style="padding: 0.5rem 1rem; border: 2px solid #059669; background: transparent; color: #059669; border-radius: 0.25rem; cursor: pointer; transition: all 0.3s;">Eco-Friendly</button>
+                    <button class="filter-btn" data-filter="safety" style="padding: 0.5rem 1rem; border: 2px solid #dc2626; background: transparent; color: #dc2626; border-radius: 0.25rem; cursor: pointer; transition: all 0.3s;">Safety</button>
+                </div>
+                
+                <div class="sort-container">
+                    <select id="sortProducts" style="padding: 0.5rem; border: 2px solid #e5e7eb; border-radius: 0.25rem; background: white; cursor: pointer;">
+                        <option value="default">Sort by...</option>
+                        <option value="price-low">Price: Low to High</option>
+                        <option value="price-high">Price: High to Low</option>
+                        <option value="rating">Highest Rated</option>
+                        <option value="newest">Newest First</option>
+                    </select>
+                </div>
+            </div>
+            
+            <div class="products-grid" id="productsGrid">
                 <div class="product-card">
+                    <div class="product-badge">🔥 Bestseller</div>
+                    <button class="quick-view" title="Quick View"><i class="fas fa-eye"></i></button>
                     <div class="product-image">
                         <img src="https://images.unsplash.com/photo-1589924691995-400dc9ecc119?w=300&h=200&fit=crop&crop=center" alt="Smart Pet Feeder Pro" style="width: 100%; height: 200px; object-fit: cover; border-radius: 0.5rem;">
                     </div>
                     <h3 class="product-title">Smart Pet Feeder Pro</h3>
-                    <div class="product-price">$149.99</div>
+                    <div class="product-rating">
+                        <div class="stars">★★★★★</div>
+                        <span class="rating-text">(4.9) 2,847 reviews</span>
+                    </div>
+                    <div class="product-price">$149.99 <span style="text-decoration: line-through; color: #9ca3af; font-size: 0.9rem;">$199.99</span></div>
                     <p class="product-description">AI-powered feeding schedule with camera monitoring, portion control, and health tracking. App-controlled with voice commands and treat dispensing.</p>
-                    <button class="add-to-cart">Add to Cart</button>
+                    <button class="add-to-cart"><span><i class="fas fa-cart-plus"></i> Add to Cart</span></button>
                 </div>
 
                 <div class="product-card">
+                    <div class="product-badge">🆕 New</div>
+                    <button class="quick-view" title="Quick View"><i class="fas fa-eye"></i></button>
                     <div class="product-image">
                         <img src="https://images.unsplash.com/photo-1601758228041-f3b2795255f1?w=300&h=200&fit=crop&crop=center" alt="GPS Pet Tracker" style="width: 100%; height: 200px; object-fit: cover; border-radius: 0.5rem;">
                     </div>
                     <h3 class="product-title">GPS Pet Tracker</h3>
+                    <div class="product-rating">
+                        <div class="stars">★★★★☆</div>
+                        <span class="rating-text">(4.7) 1,523 reviews</span>
+                    </div>
                     <div class="product-price">$89.99</div>
                     <p class="product-description">Real-time location tracking with geofencing alerts, escape notifications, and activity monitoring. Waterproof with 7-day battery life.</p>
-                    <button class="add-to-cart">Add to Cart</button>
+                    <button class="add-to-cart"><span><i class="fas fa-cart-plus"></i> Add to Cart</span></button>
                 </div>
 
                 <div class="product-card">
+                    <div class="product-badge">🌱 Eco</div>
+                    <button class="quick-view" title="Quick View"><i class="fas fa-eye"></i></button>
                     <div class="product-image">
                         <img src="https://images.unsplash.com/photo-1583337130417-3346a1be7dee?w=300&h=200&fit=crop&crop=center" alt="Eco-Friendly Chew Toys" style="width: 100%; height: 200px; object-fit: cover; border-radius: 0.5rem;">
                     </div>
                     <h3 class="product-title">Eco-Friendly Chew Toys</h3>
+                    <div class="product-rating">
+                        <div class="stars">★★★★★</div>
+                        <span class="rating-text">(4.8) 892 reviews</span>
+                    </div>
                     <div class="product-price">$24.99</div>
                     <p class="product-description">100% biodegradable chew toys made from natural hemp and organic cotton. Non-toxic, sustainable, and designed for aggressive chewers.</p>
-                    <button class="add-to-cart">Add to Cart</button>
+                    <button class="add-to-cart"><span><i class="fas fa-cart-plus"></i> Add to Cart</span></button>
                 </div>
 
                 <div class="product-card">
@@ -946,8 +1126,8 @@
     </style>
 
     <script>
-        // Enhanced cart functionality with full UX/UI
-        let cart = [];
+        // Enhanced cart functionality with full UX/UI and performance optimizations
+        let cart = JSON.parse(localStorage.getItem('barkBeyondCart')) || [];
         let cartCount = 0;
         const cartButton = document.getElementById('cartButton');
         const addToCartButtons = document.querySelectorAll('.add-to-cart');
@@ -955,6 +1135,62 @@
         const checkoutModal = document.getElementById('checkoutModal');
         const cartItems = document.getElementById('cartItems');
         const cartTotal = document.getElementById('cartTotal');
+        
+        // Performance optimization - Debounce function
+        function debounce(func, wait) {
+            let timeout;
+            return function executedFunction(...args) {
+                const later = () => {
+                    clearTimeout(timeout);
+                    func(...args);
+                };
+                clearTimeout(timeout);
+                timeout = setTimeout(later, wait);
+            };
+        }
+        
+        // Enhanced scroll effects
+        const header = document.querySelector('.header');
+        const handleScroll = debounce(() => {
+            if (window.scrollY > 100) {
+                header.classList.add('scrolled');
+            } else {
+                header.classList.remove('scrolled');
+            }
+        }, 10);
+        
+        window.addEventListener('scroll', handleScroll);
+        
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.opacity = '1';
+                    entry.target.style.transform = 'translateY(0)';
+                }
+            });
+        }, observerOptions);
+        
+        // Observe all product cards
+        document.addEventListener('DOMContentLoaded', () => {
+            const productCards = document.querySelectorAll('.product-card');
+            productCards.forEach((card, index) => {
+                card.style.opacity = '0';
+                card.style.transform = 'translateY(30px)';
+                card.style.transition = `opacity 0.6s ease ${index * 0.1}s, transform 0.6s ease ${index * 0.1}s`;
+                observer.observe(card);
+            });
+        });
+        
+        // Save cart to localStorage
+        function saveCart() {
+            localStorage.setItem('barkBeyondCart', JSON.stringify(cart));
+        }
 
         // Product data
         const products = {
@@ -989,19 +1225,98 @@
             const product = products[productKey];
             const existingItem = cart.find(item => item.key === productKey);
             
+            // Add visual feedback
+            const button = event.target.closest('.add-to-cart');
+            const originalText = button.innerHTML;
+            button.innerHTML = '<span><i class="fas fa-check"></i> Added!</span>';
+            button.style.background = '#059669';
+            
+            setTimeout(() => {
+                button.innerHTML = originalText;
+                button.style.background = '';
+            }, 1500);
+            
             if (existingItem) {
                 existingItem.quantity += 1;
+                showNotification(`Updated ${product.name} quantity in cart!`, 'success');
             } else {
                 cart.push({
                     key: productKey,
                     name: product.name,
                     price: product.price,
                     emoji: product.emoji,
-                    quantity: 1
+                    quantity: 1,
+                    addedAt: new Date().toISOString()
                 });
+                showNotification(`${product.name} added to cart!`, 'success');
             }
             
             updateCartDisplay();
+            saveCart();
+            
+            // Animate cart button
+            cartButton.style.transform = 'scale(1.1)';
+            setTimeout(() => {
+                cartButton.style.transform = 'scale(1)';
+            }, 200);
+        }
+        
+        // Enhanced notification system
+        function showNotification(message, type = 'info') {
+            const notification = document.createElement('div');
+            notification.className = `notification ${type}`;
+            notification.innerHTML = `
+                <i class="fas fa-${type === 'success' ? 'check-circle' : 'info-circle'}"></i>
+                <span>${message}</span>
+                <button onclick="this.parentElement.remove()">&times;</button>
+            `;
+            
+            // Add notification styles if not exists
+            if (!document.querySelector('.notification-styles')) {
+                const style = document.createElement('style');
+                style.className = 'notification-styles';
+                style.textContent = `
+                    .notification {
+                        position: fixed;
+                        top: 20px;
+                        right: 20px;
+                        background: white;
+                        padding: 1rem 1.5rem;
+                        border-radius: 0.5rem;
+                        box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+                        display: flex;
+                        align-items: center;
+                        gap: 0.5rem;
+                        z-index: 1000;
+                        animation: slideIn 0.3s ease;
+                        max-width: 300px;
+                        border-left: 4px solid #4f46e5;
+                    }
+                    .notification.success { border-left-color: #059669; }
+                    .notification button {
+                        background: none;
+                        border: none;
+                        font-size: 1.2rem;
+                        cursor: pointer;
+                        margin-left: auto;
+                    }
+                    @keyframes slideIn {
+                        from { transform: translateX(100%); opacity: 0; }
+                        to { transform: translateX(0); opacity: 1; }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+            
+            document.body.appendChild(notification);
+            
+            // Auto remove after 3 seconds
+            setTimeout(() => {
+                if (notification.parentElement) {
+                    notification.style.animation = 'slideIn 0.3s ease reverse';
+                    setTimeout(() => notification.remove(), 300);
+                }
+            }, 3000);
         }
 
         function removeFromCart(productKey) {
@@ -1138,6 +1453,184 @@
             });
         }
 
+        // Enhanced Product Search and Filter System
+        const productSearch = document.getElementById('productSearch');
+        const searchResults = document.getElementById('searchResults');
+        const filterBtns = document.querySelectorAll('.filter-btn');
+        const sortSelect = document.getElementById('sortProducts');
+        const productsGrid = document.getElementById('productsGrid');
+        
+        // Product data with enhanced metadata
+        const productData = [
+            { name: 'Smart Pet Feeder Pro', price: 149.99, category: 'smart', rating: 4.9, reviews: 2847, isNew: false, badge: '🔥 Bestseller' },
+            { name: 'GPS Pet Tracker', price: 89.99, category: 'smart', rating: 4.7, reviews: 1523, isNew: true, badge: '🆕 New' },
+            { name: 'Eco-Friendly Chew Toys', price: 24.99, category: 'eco', rating: 4.8, reviews: 892, isNew: false, badge: '🌱 Eco' },
+            { name: 'Glow-in-Dark Safety Leash', price: 39.99, category: 'safety', rating: 4.6, reviews: 654, isNew: false, badge: '🔒 Safety' },
+            { name: 'Smart Pet House', price: 299.99, category: 'smart', rating: 4.9, reviews: 432, isNew: false, badge: '🏠 Premium' },
+            { name: 'Health Monitor Collar', price: 129.99, category: 'smart', rating: 4.8, reviews: 1876, isNew: false, badge: '❤️ Health' },
+            { name: 'Smart Water Fountain', price: 79.99, category: 'smart', rating: 4.7, reviews: 987, isNew: false, badge: '💧 Hydration' },
+            { name: 'Interactive Treat Dispenser', price: 59.99, category: 'smart', rating: 4.5, reviews: 543, isNew: false, badge: '🎮 Interactive' }
+        ];
+        
+        // Search functionality with real-time suggestions
+        productSearch.addEventListener('input', debounce((e) => {
+            const query = e.target.value.toLowerCase().trim();
+            
+            if (query.length > 0) {
+                const matches = productData.filter(product => 
+                    product.name.toLowerCase().includes(query)
+                );
+                
+                if (matches.length > 0) {
+                    searchResults.innerHTML = matches.map(product => `
+                        <div class="search-result-item" style="padding: 0.75rem; border-bottom: 1px solid #f3f4f6; cursor: pointer; transition: background 0.2s;" 
+                             onmouseover="this.style.background='#f9fafb'" 
+                             onmouseout="this.style.background='white'"
+                             onclick="selectSearchResult('${product.name}')">
+                            <div style="font-weight: 600;">${product.name}</div>
+                            <div style="font-size: 0.875rem; color: #6b7280;">$${product.price} • ${product.rating}★ (${product.reviews} reviews)</div>
+                        </div>
+                    `).join('');
+                    searchResults.style.display = 'block';
+                } else {
+                    searchResults.innerHTML = '<div style="padding: 1rem; text-align: center; color: #6b7280;">No products found</div>';
+                    searchResults.style.display = 'block';
+                }
+            } else {
+                searchResults.style.display = 'none';
+            }
+        }, 300));
+        
+        // Hide search results when clicking outside
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.search-container')) {
+                searchResults.style.display = 'none';
+            }
+        });
+        
+        function selectSearchResult(productName) {
+            productSearch.value = productName;
+            searchResults.style.display = 'none';
+            
+            // Scroll to the product
+            const productCards = document.querySelectorAll('.product-card');
+            productCards.forEach(card => {
+                const title = card.querySelector('.product-title');
+                if (title && title.textContent === productName) {
+                    card.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                    card.style.border = '3px solid #4f46e5';
+                    setTimeout(() => {
+                        card.style.border = '2px solid transparent';
+                    }, 2000);
+                }
+            });
+        }
+        
+        // Filter functionality
+        filterBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                // Update active state
+                filterBtns.forEach(b => {
+                    b.classList.remove('active');
+                    b.style.background = 'transparent';
+                });
+                btn.classList.add('active');
+                btn.style.background = btn.style.borderColor;
+                btn.style.color = 'white';
+                
+                const filter = btn.dataset.filter;
+                filterProducts(filter);
+            });
+        });
+        
+        function filterProducts(category) {
+            const productCards = document.querySelectorAll('.product-card');
+            
+            productCards.forEach((card, index) => {
+                const shouldShow = category === 'all' || card.dataset.category === category;
+                
+                if (shouldShow) {
+                    card.style.display = 'block';
+                    card.style.animation = `fadeInUp 0.5s ease ${index * 0.1}s both`;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            // Add fadeInUp animation if not exists
+            if (!document.querySelector('.filter-animations')) {
+                const style = document.createElement('style');
+                style.className = 'filter-animations';
+                style.textContent = `
+                    @keyframes fadeInUp {
+                        from {
+                            opacity: 0;
+                            transform: translateY(30px);
+                        }
+                        to {
+                            opacity: 1;
+                            transform: translateY(0);
+                        }
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        }
+        
+        // Sort functionality
+        sortSelect.addEventListener('change', (e) => {
+            const sortType = e.target.value;
+            if (sortType !== 'default') {
+                sortProducts(sortType);
+            }
+        });
+        
+        function sortProducts(sortType) {
+            const productCards = Array.from(document.querySelectorAll('.product-card'));
+            const grid = document.getElementById('productsGrid');
+            
+            productCards.sort((a, b) => {
+                const aData = getProductData(a);
+                const bData = getProductData(b);
+                
+                switch(sortType) {
+                    case 'price-low':
+                        return aData.price - bData.price;
+                    case 'price-high':
+                        return bData.price - aData.price;
+                    case 'rating':
+                        return bData.rating - aData.rating;
+                    case 'newest':
+                        return bData.isNew - aData.isNew;
+                    default:
+                        return 0;
+                }
+            });
+            
+            // Re-append sorted cards
+            productCards.forEach((card, index) => {
+                card.style.animation = `fadeInUp 0.4s ease ${index * 0.05}s both`;
+                grid.appendChild(card);
+            });
+        }
+        
+        function getProductData(cardElement) {
+            const title = cardElement.querySelector('.product-title').textContent;
+            return productData.find(p => p.name === title) || {};
+        }
+        
+        // Add category data attributes to product cards
+        document.addEventListener('DOMContentLoaded', () => {
+            const productCards = document.querySelectorAll('.product-card');
+            productCards.forEach(card => {
+                const title = card.querySelector('.product-title').textContent;
+                const data = productData.find(p => p.name === title);
+                if (data) {
+                    card.dataset.category = data.category;
+                }
+            });
+        });
+        
         // Initialize cart display
         updateCartDisplay();
     </script>

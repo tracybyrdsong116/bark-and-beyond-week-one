@@ -37,9 +37,37 @@ const Home = () => {
 
   return (
     <div className="home">
-      {/* Hero Section */}
-      <section className="hero">
-        <div className="hero-content">
+      {/* Hero Section with Video Background */}
+      <section className="hero" style={{ position: 'relative', overflow: 'hidden' }}>
+        <video 
+          autoPlay 
+          muted 
+          loop 
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            objectFit: 'cover',
+            zIndex: 1
+          }}
+        >
+          <source src="https://videos.pexels.com/video-files/6130456/6130456-uhd_2560_1440_25fps.mp4" type="video/mp4" />
+          Your browser does not support the video tag.
+        </video>
+        <div 
+          style={{
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            background: 'rgba(0, 0, 0, 0.4)',
+            zIndex: 2
+          }}
+        ></div>
+        <div className="hero-content" style={{ position: 'relative', zIndex: 3 }}>
           <h1>Welcome to Bark & Beyond Tech</h1>
           <p>
             Smart, safe, and eco-friendly products for your beloved pets. 
@@ -163,7 +191,7 @@ const Home = () => {
       </section>
 
       {/* CTA Section */}
-      <section className="section" style={{ background: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)', color: 'white' }}>
+      <section className="section" style={{ background: 'linear-gradient(135deg, #B6F500 0%, #98CD00 100%)', color: 'white' }}>
         <div className="container text-center">
           <h2 style={{ fontSize: '2.5rem', marginBottom: '1rem' }}>
             Ready to Enhance Your Pet's Life?

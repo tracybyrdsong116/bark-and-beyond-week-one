@@ -1,6 +1,7 @@
 # 🗺️ Workflow Mapping and Project Planning
 **Tracy Byrdsong | Pursuit L1 Cohort**  
-**Assignment: June 29, 2025**
+**Assignment Due: June 29, 2025**  
+**Completed: June 29, 2025**
 
 ---
 
