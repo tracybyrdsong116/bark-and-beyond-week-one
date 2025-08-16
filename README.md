@@ -1,73 +1,66 @@
-# Eco Doggy Ecommerce
+# 🐕 Bark & Beyond Tech - E-commerce Platform
 
-Eco Doggy Ecommerce is an e-commerce application designed to provide eco-friendly technology, food, and healthy products for dogs. This project aims to create a user-friendly platform for dog owners to find sustainable and healthy options for their pets.
+**Bark & Beyond Tech** is a comprehensive e-commerce platform designed specifically for pet owners, featuring:
 
-## Features
+### **✅ Completed Features**
+- 🛒 **Full E-commerce Functionality**: Product catalog, shopping cart, checkout
+- 🎨 **Modern React Frontend**: Responsive, accessible user interface
+- 🔧 **Node.js Backend API**: RESTful API with data management
+- 📱 **Mobile-Responsive Design**: Optimized for all devices
+- ♿ **Accessibility Features**: WCAG compliant design
+- 🤖 **AI-Assisted Development**: Leveraging AI for enhanced development
 
-- User authentication and management
-- Product catalog with eco-friendly dog products
-- Shopping cart functionality
-- Secure checkout process
-- Responsive design for mobile and desktop users
+### **🏆 Business Achievements**
+- 📊 **Market Analysis**: Comprehensive competitive research
+- 💰 **Financial Planning**: Revenue projections and business model
+- 🎯 **Strategic Planning**: Growth and acquisition strategies
+- 📈 **Performance Metrics**: Success measurement framework
 
-## Project Structure
+---
 
+## 🚀 **GETTING STARTED**
+
+### **Prerequisites**
+- Node.js (v14 or higher)
+- npm or yarn package manager
+
+### **Installation**
+```bash
+# Clone the repository
+git clone [repository-url]
+cd bark-and-beyond-week-one
+
+# Install dependencies
+npm install
+
+# Start the development servers
+npm run dev
 ```
-eco-doggy-ecommerce
-├── app
-│   ├── __init__.py
-│   ├── models.py
-│   ├── routes.py
-│   ├── templates
-│   │   └── base.html
-│   └── static
-│       └── style.css
-├── requirements.txt
-├── config.py
-└── README.md
-```
 
-## Installation
+### **Available Scripts**
+- `npm run dev` - Start both frontend and backend servers
+- `npm run client` - Start only the React frontend
+- `npm run server` - Start only the Node.js backend
+- `npm run build` - Build for production
 
-1. Clone the repository:
-   ```
-   git clone https://github.com/yourusername/eco-doggy-ecommerce.git
-   cd eco-doggy-ecommerce
-   ```
+---
 
-2. Create a virtual environment:
-   ```
-   python -m venv venv
-   ```
+NS**
 
-3. Activate the virtual environment:
-   - On Windows:
-     ```
-     venv\Scripts\activate
-     ```
-   - On macOS/Linux:
-     ```
-     source venv/bin/activate
-     ```
+### **Live Demos**
+- **Main Application**: Available at `http://localhost:3000` (React frontend)
+- **API Server**: Available at `http://localhost:5000` (Node.js backend)
+- **Visual Demo**: `demos/visual-demo.html`
+- **Product Ideas**: `demos/online_product_ideas.html`
 
-4. Install the required packages:
-   ```
-   pip install -r requirements.txt
-   ```
+--
 
-## Usage
+### **Technical Excellence**
+- ⚡ **Full-Stack Implementation**: Complete frontend and backend
+- 🎯 **Modern Tech Stack**: React, Node.js, modern JavaScript
+- 📱 **Responsive Design**: Mobile-first approach
+- ♿ **Accessibility Focus**: Inclusive design principles
 
-1. Set up the configuration in `config.py` with your database details and other settings.
-2. Run the application:
-   ```
-   flask run
-   ```
-3. Open your web browser and go to `http://127.0.0.1:5000` to access the application.
+## 📄 **LICENSE**
 
-## Contributing
-
-Contributions are welcome! Please open an issue or submit a pull request for any enhancements or bug fixes.
-
-## License
-
-This project is licensed under the MIT License. See the LICENSE file for details.
+This project is part of the Pursuit L1 Cohort curriculum and is intended for educational purposes.

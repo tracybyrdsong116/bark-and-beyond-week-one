@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Pursuit Portfolio & Blog</title>
+    <!-- Tailwind CSS CDN for easy styling -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        /* Custom styles for the Inter font */
+        body {
+            font-family: "Inter", sans-serif;
+            background-color: #f8fafc; /* Light gray background */
+            color: #334155; /* Dark slate text */
+        }
+        /* Smooth scroll for navigation */
+        html {
+            scroll-behavior: smooth;
+        }
+        /* Basic styling for sections for better visual separation */
+        section {
+            padding: 4rem 1rem; /* Generous padding for sections */
+            margin-bottom: 2rem; /* Space between sections */
+            border-radius: 1rem; /* Rounded corners for sections */
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+        }
+        /* Styling for active navigation link */
+        .nav-link.active {
+            font-weight: bold;
+            color: #1d4ed8; /* Blue color for active link */
+        }
+        /* Modal specific styles */
+        .modal {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 100; /* Sit on top */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 100%; /* Full height */
+            overflow: auto; /* Enable scroll if needed */
+            background-color: rgba(0,0,0,0.7); /* Black w/ opacity */
+            justify-content: center;
+            align-items: center;
+        }
+        .modal-content {
+            background-color: #fefefe;
+            margin: auto;
+            padding: 2rem;
+            border-radius: 1rem;
+            width: 90%;
+            max-width: 800px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            position: relative;
+            animation: fadeIn 0.3s ease-out;
+        }
+        .close-button {
+            color: #aaa;
+            position: absolute;
+            top: 1rem;
+            right: 1.5rem;
+            font-size: 2rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: color 0.2s;
+        }
+        .close-button:hover,
+        .close-button:focus {
+            color: #333;
+            text-decoration: none;
+            cursor: pointer;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(-20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
+</head>
+<body class="min-h-screen flex flex-col">
+
+    <!-- Navigation Bar -->
+    <header class="bg-gray-800 text-white p-4 shadow-lg sticky top-0 z-50">
+        <nav class="container mx-auto flex flex-col sm:flex-row justify-between items-center">
+            <a href="#" class="text-2xl font-bold rounded-md p-2 hover:bg-gray-700 transition-colors mb-2 sm:mb-0">My Pursuit Showcase</a>
+            <ul class="flex space-x-4">
+                <li><a href="#portfolio" class="nav-link text-lg p-2 rounded-md hover:bg-gray-700 transition-colors">Portfolio</a></li>
+                <li><a href="#blog" class="nav-link text-lg p-2 rounded-md hover:bg-gray-700 transition-colors">Blog</a></li>
+                <li><a href="#contact" class="nav-link text-lg p-2 rounded-md hover:bg-gray-700 transition-colors">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main class="flex-grow container mx-auto p-4">
+
+        <!-- Portfolio Section -->
+        <section id="portfolio" class="bg-white mt-8">
+            <h2 class="text-4xl font-extrabold text-center mb-12 text-gray-800">Our Portfolio</h2>
+            <p class="text-center text-lg mb-8 text-gray-600 max-w-3xl mx-auto">
+                Discover a collection of projects developed by me and my classmates at Pursuit. Each project represents our dedication to learning and applying full-stack development skills.
+            </p>
+
+            <div id="portfolio-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Initial Project Cards will be loaded here by JavaScript -->
+            </div>
+            <div class="text-center mt-8">
+                <button id="load-more-projects" class="bg-blue-600 text-white px-8 py-3 rounded-full text-lg hover:bg-blue-700 transition-colors shadow-lg">Load More Projects</button>
+            </div>
+        </section>
+
+        <!-- Blog Section -->
+        <section id="blog" class="bg-white">
+            <h2 class="text-4xl font-extrabold text-center mb-12 text-gray-800">Our Blog</h2>
+            <p class="text-center text-lg mb-8 text-gray-600 max-w-3xl mx-auto">
+                Read about our learning journey, technical insights, and experiences as aspiring full-stack developers at Pursuit.
+            </p>
+
+            <div id="blog-container" class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                <!-- Initial Blog Post Cards will be loaded here by JavaScript -->
+            </div>
+            <div class="text-center mt-8">
+                <button id="load-more-blog-posts" class="bg-yellow-600 text-white px-8 py-3 rounded-full text-lg hover:bg-yellow-700 transition-colors shadow-lg">Load More Blog Posts</button>
+            </div>
+        </section>
+
+        <!-- Contact Section -->
+        <section id="contact" class="bg-white text-center">
+            <h2 class="text-4xl font-extrabold text-center mb-8 text-gray-800">Get in Touch</h2>
+            <p class="text-lg mb-8 text-gray-600 max-w-2xl mx-auto">
+                Have questions about our projects or want to collaborate? Feel free to reach out to us!
+            </p>
+            <div class="flex flex-col items-center space-y-4">
+                <a href="mailto:your.email@example.com" class="bg-indigo-600 text-white px-8 py-3 rounded-full text-lg hover:bg-indigo-700 transition-colors shadow-lg">Email Us</a>
+                <a href="#" class="text-indigo-600 hover:underline">Connect on LinkedIn</a>
+                <a href="#" class="text-indigo-600 hover:underline">View our GitHub Organization</a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Project Details Modal -->
+    <div id="project-modal" class="modal">
+        <div class="modal-content">
+            <span class="close-button">&times;</span>
+            <img id="modal-project-image" src="" alt="Project Image" class="w-full h-64 object-cover rounded-lg mb-4 border border-gray-200">
+            <h3 id="modal-project-title" class="text-3xl font-bold mb-2 text-gray-800"></h3>
+            <p id="modal-project-description" class="text-gray-700 mb-4"></p>
+            <div id="modal-project-tech-stack" class="flex flex-wrap gap-2 mb-4"></div>
+            <div class="flex justify-start gap-4">
+                <a id="modal-project-demo" href="#" class="inline-block bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors shadow-md">View Demo</a>
+                <a id="modal-project-github" href="#" class="inline-block bg-gray-700 text-white px-6 py-2 rounded-lg hover:bg-gray-800 transition-colors shadow-md">GitHub</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer class="bg-gray-800 text-white p-6 text-center mt-auto shadow-inner">
+        <p>&copy; 2025 Pursuit Cohort. All rights reserved.</p>
+        <p class="mt-2 text-sm">Built with HTML, CSS (Tailwind CSS), and JavaScript.</p>
+    </footer>
+
+    <script>
+        // --- Data for Projects and Blog Posts ---
+        const allProjects = [
+            {
+                id: 'p1',
+                title: 'Project Alpha: E-commerce Site',
+                description: 'A full-stack e-commerce platform built with React and Node.js, featuring user authentication, product listings, and a shopping cart. This project demonstrates robust backend API design and a dynamic frontend user experience.',
+                image: 'https://placehold.co/400x250/e0f2fe/1e40af?text=E-commerce+Site',
+                techStack: ['React', 'Node.js', 'PostgreSQL', 'Stripe API'],
+                demoLink: 'http://localhost:8000/demos/visual-demo.html',
+                githubLink: 'https://github.com/tracybyrdsong116/bark-and-beyond-week-one'
+            },
+            {
+                id: 'p2',
+                title: 'Project Beta: Task Manager',
+                description: 'A collaborative task management application with real-time updates, user roles, and drag-and-drop functionality. Users can create, assign, and track tasks efficiently. Built with Vue.js for the frontend and Express.js for the backend.',
+                image: 'https://placehold.co/400x250/dcfce7/166534?text=Task+Manager',
+                techStack: ['Vue.js', 'Express.js', 'MongoDB', 'Socket.IO'],
+                demoLink: 'http://localhost:8000/demos/online_product_ideas.html',
+                githubLink: 'https://github.com/tracybyrdsong116/bark-and-beyond-week-one'
+            },
+            {
+                id: 'p3',
+                title: 'Project Gamma: Recipe Finder',
+                description: 'A web application that allows users to search, save, and share recipes from various online sources. It integrates with a third-party recipe API to fetch diverse culinary options and allows users to create their own recipe collections.',
+                image: 'https://placehold.co/400x250/ede9fe/6b21a8?text=Recipe+Finder',
+                techStack: ['HTML', 'CSS', 'JavaScript', 'API Integration'],
+                demoLink: 'http://localhost:8000/demos/visual-demo.html',
+                githubLink: 'https://github.com/tracybyrdsong116/bark-and-beyond-week-one'
+            },
+            {
+                id: 'p4',
+                title: 'Project Delta: Social Media Clone',
+                description: 'A simplified social media platform where users can create profiles, post updates, follow others, and interact with content through likes and comments. Focuses on user interaction and data persistence.',
+                image: 'https://placehold.co/400x250/ffe4e6/881337?text=Social+Clone',
+                techStack: ['React', 'Firebase', 'Cloud Functions'],
+                demoLink: 'http://localhost:8000/demos/visual-demo.html',
+                githubLink: 'https://github.com/tracybyrdsong116/bark-and-beyond-week-one'
+            },
+            {
+                id: 'p5',
+                title: 'Project Epsilon: Weather Dashboard',
+                description: 'A dynamic weather dashboard providing real-time weather information based on user location or search queries. Utilizes a weather API to display current conditions and forecasts.',
+                image: 'https://placehold.co/400x250/eff6ff/1e3a8a?text=Weather+App',
+                techStack: ['HTML', 'CSS', 'JavaScript', 'OpenWeather API'],
+                demoLink: 'http://localhost:8000/demos/visual-demo.html',
+                githubLink: 'https://github.com/tracybyrdsong116/bark-and-beyond-week-one'
+            }
+        ];
+
+        const allBlogPosts = [
+            {
+                id: 'b1',
+                title: 'Getting Started with Node.js',
+                description: 'A beginner\'s guide to setting up your first Node.js server with Express.js, covering routing, middleware, and basic API creation. Learn how to build a robust backend from scratch and understand the fundamentals of server-side JavaScript.',
+                tags: ['Node.js', 'Backend', 'Express.js']
+            },
+            {
+                id: 'b2',
+                title: 'Mastering CSS Flexbox for Responsive Layouts',
+                description: 'Dive deep into Flexbox properties and learn how to create flexible and responsive layouts for modern web applications. Includes practical examples and common use cases to help you design adaptable interfaces for all screen sizes.',
+                tags: ['CSS', 'Frontend', 'Responsive Design']
+            },
+            {
+                id: 'b3',
+                title: 'Introduction to React Hooks',
+                description: 'Explore the power of React Hooks (useState, useEffect, useContext) and how they simplify state management and side effects in functional components. This post provides clear examples for each hook.',
+                tags: ['React', 'Frontend', 'JavaScript']
+            },
+            {
+                id: 'b4',
+                title: 'Understanding RESTful APIs',
+                description: 'A comprehensive overview of RESTful API principles, including HTTP methods, status codes, and resource-based URLs. Learn how to design and consume APIs effectively for your full-stack applications.',
+                tags: ['API', 'Backend', 'Web Development']
+            },
+            {
+                id: 'b5',
+                title: 'Database Basics: SQL vs NoSQL',
+                description: 'Demystifying the differences between SQL and NoSQL databases. This post helps you understand when to choose a relational database like PostgreSQL versus a document database like MongoDB for your projects.',
+                tags: ['Database', 'SQL', 'NoSQL']
+            }
+        ];
+
+        let projectsLoaded = 0;
+        let blogPostsLoaded = 0;
+        const itemsPerLoad = 3; // Number of items to load each time
+
+        // --- DOM Elements ---
+        const portfolioContainer = document.getElementById('portfolio-container');
+        const blogContainer = document.getElementById('blog-container');
+        const loadMoreProjectsBtn = document.getElementById('load-more-projects');
+        const loadMoreBlogPostsBtn = document.getElementById('load-more-blog-posts');
+
+        const projectModal = document.getElementById('project-modal');
+        const closeModalBtn = document.querySelector('.close-button');
+        const modalProjectImage = document.getElementById('modal-project-image');
+        const modalProjectTitle = document.getElementById('modal-project-title');
+        const modalProjectDescription = document.getElementById('modal-project-description');
+        const modalProjectTechStack = document.getElementById('modal-project-tech-stack');
+        const modalProjectDemo = document.getElementById('modal-project-demo');
+        const modalProjectGitHub = document.getElementById('modal-project-github');
+
+        // --- Functions to Render Content ---
+
+        // Function to create a project card HTML
+        function createProjectCard(project) {
+            const projectCard = document.createElement('div');
+            projectCard.className = 'bg-blue-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 transform hover:-translate-y-1 cursor-pointer project-card';
+            projectCard.setAttribute('data-project-id', project.id); // Custom attribute to link to data
+
+            const techTags = project.techStack.map(tech =>
+                `<span class="bg-blue-200 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full">${tech}</span>`
+            ).join('');
+
+            projectCard.innerHTML = `
+                <img src="${project.image}" alt="${project.title} Thumbnail" class="w-full h-48 object-cover rounded-lg mb-4 border border-blue-200">
+                <h3 class="text-2xl font-semibold mb-2 text-blue-800">${project.title}</h3>
+                <p class="text-gray-700 mb-4 line-clamp-3">${project.description}</p>
+                <div class="flex flex-wrap gap-2 mb-4">${techTags}</div>
+                <div class="flex justify-between">
+                    <a href="${project.demoLink}" target="_blank" class="inline-block bg-blue-600 text-white px-6 py-2 rounded-lg hover:bg-blue-700 transition-colors shadow-md" onclick="event.stopPropagation()">View Demo</a>
+                    <a href="${project.githubLink}" target="_blank" class="inline-block bg-gray-700 text-white px-6 py-2 rounded-lg hover:bg-gray-800 transition-colors shadow-md" onclick="event.stopPropagation()">GitHub</a>
+                </div>
+            `;
+            return projectCard;
+        }
+
+        // Function to create a blog post card HTML
+        function createBlogPostCard(post) {
+            const blogPostCard = document.createElement('div');
+            blogPostCard.className = 'bg-red-50 p-6 rounded-xl shadow-md hover:shadow-lg transition-shadow duration-300 transform hover:-translate-y-1';
+
+            const tagSpans = post.tags.map(tag =>
+                `<span class="bg-red-200 text-red-800 text-xs font-medium px-2.5 py-0.5 rounded-full">${tag}</span>`
+            ).join('');
+
+            blogPostCard.innerHTML = `
+                <h3 class="text-2xl font-semibold mb-2 text-red-800">${post.title}</h3>
+                <p class="text-gray-700 mb-4 line-clamp-3">${post.description}</p>
+                <div class="flex flex-wrap gap-2 mb-4">${tagSpans}</div>
+                <a href="#" class="inline-block bg-red-600 text-white px-6 py-2 rounded-lg hover:bg-red-700 transition-colors shadow-md">Read More</a>
+            `;
+            return blogPostCard;
+        }
+
+        // Function to load projects
+        function loadProjects() {
+            const projectsToLoad = allProjects.slice(projectsLoaded, projectsLoaded + itemsPerLoad);
+            projectsToLoad.forEach(project => {
+                portfolioContainer.appendChild(createProjectCard(project));
+            });
+            projectsLoaded += projectsToLoad.length;
+
+            if (projectsLoaded >= allProjects.length) {
+                loadMoreProjectsBtn.style.display = 'none'; // Hide button if all projects are loaded
+            }
+        }
+
+        // Function to load blog posts
+        function loadBlogPosts() {
+            const postsToLoad = allBlogPosts.slice(blogPostsLoaded, blogPostsLoaded + itemsPerLoad);
+            postsToLoad.forEach(post => {
+                blogContainer.appendChild(createBlogPostCard(post));
+            });
+            blogPostsLoaded += postsToLoad.length;
+
+            if (blogPostsLoaded >= allBlogPosts.length) {
+                loadMoreBlogPostsBtn.style.display = 'none'; // Hide button if all posts are loaded
+            }
+        }
+
+        // --- Event Listeners ---
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Initial load of content
+            loadProjects();
+            loadBlogPosts();
+
+            // Navigation Link Highlighting
+            const navLinks = document.querySelectorAll('.nav-link');
+            const sections = document.querySelectorAll('section');
+
+            const observerOptions = {
+                root: null,
+                rootMargin: '0px',
+                threshold: 0.5
+            };
+
+            const observer = new IntersectionObserver((entries, observer) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        navLinks.forEach(link => link.classList.remove('active'));
+                        const activeLink = document.querySelector(`.nav-link[href="#${entry.target.id}"]`);
+                        if (activeLink) {
+                            activeLink.classList.add('active');
+                        }
+                    }
+                });
+            }, observerOptions);
+
+            sections.forEach(section => {
+                observer.observe(section);
+            });
+
+            const currentHash = window.location.hash;
+            if (currentHash) {
+                const initialActiveLink = document.querySelector(`.nav-link[href="${currentHash}"]`);
+                if (initialActiveLink) {
+                    initialActiveLink.classList.add('active');
+                }
+            } else {
+                const portfolioLink = document.querySelector('.nav-link[href="#portfolio"]');
+                if (portfolioLink) {
+                    portfolioLink.classList.add('active');
+                }
+            }
+
+            // Load More Buttons
+            loadMoreProjectsBtn.addEventListener('click', loadProjects);
+            loadMoreBlogPostsBtn.addEventListener('click', loadBlogPosts);
+
+            // Project Modal Logic
+            portfolioContainer.addEventListener('click', (event) => {
+                const projectCard = event.target.closest('.project-card');
+                if (projectCard) {
+                    const projectId = projectCard.getAttribute('data-project-id');
+                    const project = allProjects.find(p => p.id === projectId);
+
+                    if (project) {
+                        modalProjectImage.src = project.image;
+                        modalProjectTitle.textContent = project.title;
+                        modalProjectDescription.textContent = project.description;
+
+                        // Clear previous tech stack and add new ones
+                        modalProjectTechStack.innerHTML = '';
+                        project.techStack.forEach(tech => {
+                            const span = document.createElement('span');
+                            span.className = 'bg-blue-200 text-blue-800 text-xs font-medium px-2.5 py-0.5 rounded-full';
+                            span.textContent = tech;
+                            modalProjectTechStack.appendChild(span);
+                        });
+
+                        modalProjectDemo.href = project.demoLink;
+                        modalProjectGitHub.href = project.githubLink;
+
+                        projectModal.style.display = 'flex'; // Use flex to center
+                    }
+                }
+            });
+
+            closeModalBtn.addEventListener('click', () => {
+                projectModal.style.display = 'none';
+            });
+
+            // Close modal if user clicks outside of it
+            window.addEventListener('click', (event) => {
+                if (event.target === projectModal) {
+                    projectModal.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
