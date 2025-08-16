@@ -1,0 +1,56 @@
+.navbar-brand {
+    font-weight: bold;
+    font-size: 1.5rem;
+}
+
+.nav-link {
+    font-size: 1.1rem;
+}
+
+.card {
+    transition: transform 0.2s;
+    border: none;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.btn-success {
+    background-color: #28a745;
+    border-color: #28a745;
+}
+
+.btn-success:hover {
+    background-color: #218838;
+    border-color: #1e7e34;
+}
+
+.display-4 {
+    font-weight: 600;
+}
+
+.bg-success {
+    background-color: #28a745 !important;
+}
+
+.lead {
+    font-size: 1.4rem;
+}
+
+/* Accessibility improvements */
+.btn {
+    font-size: 1.1rem;
+    padding: 0.5rem 1.5rem;
+}
+
+/* High contrast text for better readability */
+.card-text {
+    color: #333;
+}
+
+/* Larger click targets for navigation */
+.nav-link {
+    padding: 0.8rem 1rem;
+}
